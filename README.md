@@ -1,11 +1,3 @@
-Heading
-=======
+# Software Engineering Methods
 
-Sub-heading
------------
-
-Paragraphs are separated
-by a blank line.
-
-Two spaces at the end of a line  
-produces a line break.
+[![Build Status](https://travis-ci.com/WintMyatAung/Group-8.svg?branch=master)](https://travis-ci.com/WintMyatAung/Group-8)
