@@ -1,7 +1,7 @@
--Each group member should be able to easily contact other team members by providing appropriate contact information.
+- Each group member should be able to easily contact other team members by providing appropriate contact information.
 - When working in a group, treat other team members and respect their opinions, even if you don't necessarily agree.
 - You expect a full and fair contribution to teamwork.
--If you agree to perform the tasks assigned by the team, you should try to work by the appointed time. Failure to follow this instruction can affect the progress of the entire project.
--It is your responsibility to attend all meetings organized by the team in order to move the project forward and to get to these meetings on time.
--If you are unable to attend a group meeting, you should provide your written opinion and share it with other team members prior to the meeting.
--If a member does not complete the task on time, you need to notify the other member and forward the task to another member.
+- If you agree to perform the tasks assigned by the team, you should try to work by the appointed time. Failure to follow this instruction can affect the progress of the entire project.
+- It is your responsibility to attend all meetings organized by the team in order to move the project forward and to get to these meetings on time.
+- If you are unable to attend a group meeting, you should provide your written opinion and share it with other team members prior to the meeting.
+- If a member does not complete the task on time, you need to notify the other member and forward the task to another member.
