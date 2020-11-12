@@ -294,7 +294,6 @@ public class App
             String countrystring = String.format("%-5s %-50s %-15s %-30s %-25s %-20s", cou.code, cou.name, cou.Con, cou.Reg, cou.Pop, cou.cap);
             System.out.println(countrystring);
         }
-        System.out.println("----XXX----\n\n");
         for (int i = 1; i <= 75; i = i +1)
         {
             System.out.print("--");
