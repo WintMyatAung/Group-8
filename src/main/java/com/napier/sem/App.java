@@ -23,6 +23,15 @@ public class App
         a.PrintCountrylist(country);
         a.PrintCountrylist(countrycc);
 
+        // Extract employee salary information
+        ArrayList<city> city = a.showcity();
+        //ArrayList<city> citycontinent = a.showcitywithcontinent();
+
+        // Call output function
+        a.outputcity(city);
+        //a.outputcity(citycontinent);
+
+
         // Disconnect from database
         a.disconnect();
     }
@@ -157,10 +166,45 @@ public class App
             return null;
         }
     }
+    /**
+     * Gets all the current employees and salaries.
+     * @return A list of all employees and salaries, or null if there is an error.
+     */
+    public ArrayList<city> showcity()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect = "SELECT * FROM city ORDER BY Population DESC ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract employee information
+            ArrayList<city> city = new ArrayList<city>();
+            while (rset.next())
+            {
+                city ct = new city();
+                ct.ID = rset.getInt("ID");
+                ct.Name = rset.getString("Name");
+                ct.CountryCode = rset.getString("CountryCode");
+                ct.District = rset.getString("District");
+                ct.Population = rset.getInt("Population");
+                city.add(ct);
+            }
+            return city;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city");
+            return null;
+        }
+    }
     public void PrintCountrylist (ArrayList<country> country)
     {
         // Print header
-        System.out.println("Table contents sorted by Largest Population to Smallest Population \n");
+        System.out.println("Table countries sorted by Largest Population to Smallest Population \n");
         System.out.println(String.format("%-5s %-50s %-15s %-30s %-25s %-20s","Code", "Name", "Continent", "Region", "Population", "Capital"));
         System.out.println(String.format("%-5s %-50s %-15s %-30s %-25s %-20s","----", "----", "---------", "------", "----------", "-------"));
         // Loop over all Country in the list
@@ -169,6 +213,27 @@ public class App
             String countrystring = String.format("%-5s %-50s %-15s %-30s %-25s %-20s", cou.code, cou.name, cou.Con, cou.Reg, cou.Pop, cou.cap);
             System.out.println(countrystring);
         }
-        System.out.println("----XXX----");
+        System.out.println("----XXX----\n\n");
     }
+    /**
+     * Prints a list of employees.
+     * @param city The list of employees to print.
+     */
+    public void outputcity(ArrayList<city> city)
+    {
+        // Print header
+        System.out.println("Table cities are sorted by Largest Population to Smallest Population \n");
+        System.out.println(String.format("%-40s %-20s %-40s %-30s", "Name", "CountryCode", "District", "Population"));
+        System.out.println(String.format("%-40s %-20s %-40s %-30s", "____", "___________", "________", "__________"));
+        // Loop over all employees in the list
+        for (city ct : city)
+        {
+            String ct_string =
+                    String.format("%-40s %-20s %-40s %-30s",
+                            ct.Name, ct.CountryCode, ct.District, ct.Population);
+            System.out.println(ct_string);
+        }
+        System.out.println("----XXX----\n\n");
+    }
+
 }
