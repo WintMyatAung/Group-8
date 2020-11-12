@@ -2,6 +2,7 @@ package com.napier.sem;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class App
 {
@@ -13,19 +14,40 @@ public class App
         // Connect to database
         a.connect();
 
-        // Get the largest to smallest population by country
+        //  Get the largest to smallest population by country
         ArrayList<country> country = a.getcountrydata();
 
-        // Get the largest to smallest population by country continent
+        //  Get the largest to smallest population by country continent
         ArrayList<country> countrycc = a.getcountryContinentdata();
 
-        //Get the population of country region in order from largest to smallest
+        //  Get the population of country region in order from largest to smallest
         ArrayList<country> region = a.getcountryregiondata();
 
+        //  Get top 5 populated countries in a Continent
+        ArrayList<country> pcountry_continent = a.getPopulatedCountriesContinent_data();
+
+        //  Get top 5 populated countries in a Region
+        ArrayList<country> pcountry_region = a.getPopulatedCountriesRegion_data();
+
+
+
         // output the country array list
+        System.out.println("Table countries sorted by Largest Population to Smallest Population \n");
         a.PrintCountrylist(country);
+
+        System.out.println("Table countries sorted by Largest Population to Smallest Population of a Continent \n");
         a.PrintCountrylist(countrycc);
+
+        System.out.println("Table countries sorted by Largest Population to Smallest Population of a Region \n");
         a.PrintCountrylist(region);
+
+        System.out.println("Top 5 populated countries in a Continent.......");
+        a.PrintCountrylist(pcountry_continent);
+
+        System.out.println("Top 5 populated countries in a Region.......");
+        a.PrintCountrylist(pcountry_region);
+
+
 
         // Extract city and city continent information
         ArrayList<city> city = a.showcity();
@@ -104,6 +126,102 @@ public class App
             }
         }
     }
+
+//  Wint Myat Aung  //
+//**  Get top 5 populated countries in a Continent  **//
+    public ArrayList<country> getPopulatedCountriesContinent_data() {
+    //  System.out.println("Top 5 populated countries in a continent.......");
+
+        Scanner scan = new Scanner(System.in);
+    //  System.out.print("Please enter a Continent: ");
+    //  String Con = scan.nextLine();
+
+    //  System.out.print("Enter the number to get the populated countries of a continent: ");
+    //  num = scan.nextInt();
+
+        scan.close();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String query ="select country.Code,country.Name,country.Continent,country.Region,country.Population,city.Name FROM country,city where country.Capital = city.ID and country.Continent = 'Asia' order by country.Population desc limit 5";
+            boolean b = query instanceof String;
+            System.out.println(b);
+
+            // Execute SQL statement
+            ResultSet rs = stmt.executeQuery(query);
+
+            ArrayList<country> pcountry_continent = new ArrayList<com.napier.sem.country>();
+            while (rs.next())
+            {
+                com.napier.sem.country country = new country();
+                country.code = rs.getString("country.Code");
+                country.name = rs.getString("country.Name");
+                country.Con = rs.getString("country.Continent");
+                country.Reg = rs.getString("country.Region");
+                country.Pop = rs.getInt("country.Population");
+                country.cap = rs.getString("city.Name");
+                pcountry_continent.add(country);
+            }
+            return pcountry_continent;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Populated Countries in details");
+        }
+        return null;
+    }
+//** ---- **//
+
+
+//**  Get top 5 populated countries in a Region  **//
+    public ArrayList<country> getPopulatedCountriesRegion_data() {
+        Scanner scan = new Scanner(System.in);
+        //  System.out.print("Please enter a Region: ");
+        //  String Reg = scan.nextLine();
+
+        //  System.out.print("Enter the number to get the populated countries of a Region: ");
+        //  num = scan.nextInt();
+
+        scan.close();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String query ="select country.Code,country.Name,country.Continent,country.Region,country.Population,city.Name FROM country,city where country.Capital = city.ID and country.Region = 'Southern and Central Asia' order by country.Population desc limit 5";
+
+            // Execute SQL statement
+            ResultSet rs = stmt.executeQuery(query);
+
+            ArrayList<country> pcountry_region = new ArrayList<com.napier.sem.country>();
+            while (rs.next())
+            {
+                com.napier.sem.country country = new country();
+                country.code = rs.getString("country.Code");
+                country.name = rs.getString("country.Name");
+                country.Con = rs.getString("country.Continent");
+                country.Reg = rs.getString("country.Region");
+                country.Pop = rs.getInt("country.Population");
+                country.cap = rs.getString("city.Name");
+                pcountry_region.add(country);
+            }
+            return pcountry_region;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Populated Countries in details");
+        }
+        return null;
+    }
+//** ---- **//
+//  Wint Myat Aung  //
+
+
+
     /**
      * Gets all the countries.
      */
@@ -285,7 +403,7 @@ public class App
     public void PrintCountrylist (ArrayList<country> country)
     {
         // Print header
-        System.out.println("Table countries sorted by Largest Population to Smallest Population \n");
+//        System.out.println("Table countries sorted by Largest Population to Smallest Population \n");
         System.out.println(String.format("%-5s %-50s %-15s %-30s %-25s %-20s","Code", "Name", "Continent", "Region", "Population", "Capital"));
         System.out.println(String.format("%-5s %-50s %-15s %-30s %-25s %-20s","----", "----", "---------", "------", "----------", "-------"));
         // Loop over all Country in the list
@@ -296,24 +414,25 @@ public class App
         }
         System.out.println("----XXX----\n\n");
     }
+
     /**
      * Prints a list of cities
      */
-    public void outputcity(ArrayList<city> city)
-    {
+    public void outputcity(ArrayList<city> city) {
         // Print header
         System.out.println("Table cities are sorted by Largest Population to Smallest Population \n");
         System.out.println(String.format("%-40s %-20s %-40s %-30s", "Name", "CountryCode", "District", "Population"));
         System.out.println(String.format("%-40s %-20s %-40s %-30s", "____", "___________", "________", "__________"));
         // Loop over all employees in the list
-        for (city ct : city)
-        {
+        for (city ct : city) {
             String ct_string =
                     String.format("%-40s %-20s %-40s %-30s",
                             ct.Name, ct.CountryCode, ct.District, ct.Population);
             System.out.println(ct_string);
         }
-        System.out.println("----XXX----\n\n");
+        for (int i = 1; i <= 25; i = i +1)
+        {
+            System.out.print("--");
+        }
     }
-
 }
