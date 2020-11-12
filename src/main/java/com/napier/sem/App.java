@@ -299,21 +299,21 @@ public class App
     /**
      * Prints a list of cities
      */
-    public void outputcity(ArrayList<city> city)
-    {
+    public void outputcity(ArrayList<city> city) {
         // Print header
         System.out.println("Table cities are sorted by Largest Population to Smallest Population \n");
         System.out.println(String.format("%-40s %-20s %-40s %-30s", "Name", "CountryCode", "District", "Population"));
         System.out.println(String.format("%-40s %-20s %-40s %-30s", "____", "___________", "________", "__________"));
         // Loop over all employees in the list
-        for (city ct : city)
-        {
+        for (city ct : city) {
             String ct_string =
                     String.format("%-40s %-20s %-40s %-30s",
                             ct.Name, ct.CountryCode, ct.District, ct.Population);
             System.out.println(ct_string);
         }
-        System.out.println("----XXX----\n\n");
+        for (int i = 1; i <= 25; i = i +1)
+        {
+            System.out.print("--");
+        }
     }
-
 }
