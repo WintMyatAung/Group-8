@@ -311,9 +311,10 @@ public class App
                             ct.Name, ct.CountryCode, ct.District, ct.Population);
             System.out.println(ct_string);
         }
-        for (int i = 1; i <= 25; i = i +1)
+        for (int i = 1; i <= 50; i = i +1)
         {
             System.out.print("--");
         }
+        System.out.print("\n");
     }
 }
