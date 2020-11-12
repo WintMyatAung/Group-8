@@ -295,6 +295,11 @@ public class App
             System.out.println(countrystring);
         }
         System.out.println("----XXX----\n\n");
+        for (int i = 1; i <= 75; i = i +1)
+        {
+            System.out.print("--");
+        }
+        System.out.print("\n");
     }
     /**
      * Prints a list of cities
@@ -311,7 +316,7 @@ public class App
                             ct.Name, ct.CountryCode, ct.District, ct.Population);
             System.out.println(ct_string);
         }
-        for (int i = 1; i <= 100; i = i +1)
+        for (int i = 1; i <= 75; i = i +1)
         {
             System.out.print("--");
         }
