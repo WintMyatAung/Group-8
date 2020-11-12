@@ -19,9 +19,13 @@ public class App
         // Get the largest to smallest population by country continent
         ArrayList<country> countrycc = a.getcountryContinentdata();
 
+        //Get the population of country region in order from largest to smallest
+        ArrayList<country> region = a.getcountryregiondata();
+
         // output the country array list
         a.PrintCountrylist(country);
         a.PrintCountrylist(countrycc);
+        a.PrintCountrylist(region);
 
         // Extract city and city continent information
         ArrayList<city> city = a.showcity();
@@ -144,6 +148,38 @@ public class App
             String query1 ="select country.Code,country.Name,country.Continent,country.Region,country.Population,city.Name from country,city where country.Capital = city.ID and country.Continent = 'Asia' order by country.Population DESC, country.Name";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(query1);
+            // Extract Country detail information
+            ArrayList<country> country = new ArrayList<com.napier.sem.country>();
+            while (rset.next())
+            {
+                com.napier.sem.country cou = new country();
+                cou.code = rset.getString("country.Code");
+                cou.name = rset.getString("country.Name");
+                cou.Con = rset.getString("country.Continent");
+                cou.Reg = rset.getString("country.Region");
+                cou.Pop = rset.getInt("country.Population");
+                cou.cap = rset.getString("city.Name");
+                country.add(cou);
+            }
+            return country;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Country details");
+            return null;
+        }
+    }
+    public ArrayList<country> getcountryregiondata()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String query ="select country.Code,country.Name,country.Continent,country.Region,country.Population,city.Name from country,city where country.Capital = city.ID and country.Region = 'Southeast Asia' order by country.Population DESC, country.Name";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(query);
             // Extract Country detail information
             ArrayList<country> country = new ArrayList<com.napier.sem.country>();
             while (rset.next())
