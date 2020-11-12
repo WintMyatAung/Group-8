@@ -23,13 +23,13 @@ public class App
         a.PrintCountrylist(country);
         a.PrintCountrylist(countrycc);
 
-        // Extract employee salary information
+        // Extract city and city continent information
         ArrayList<city> city = a.showcity();
-        //ArrayList<city> citycontinent = a.showcitywithcontinent();
+        ArrayList<city> citycontinent = a.showcitywithcontinent();
 
         // Call output function
         a.outputcity(city);
-        //a.outputcity(citycontinent);
+        a.outputcity(citycontinent);
 
 
         // Disconnect from database
@@ -190,6 +190,39 @@ public class App
                 ct.CountryCode = rset.getString("CountryCode");
                 ct.District = rset.getString("District");
                 ct.Population = rset.getInt("Population");
+                city.add(ct);
+            }
+            return city;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city");
+            return null;
+        }
+    }
+    public ArrayList<city> showcitywithcontinent()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect = "SELECT city.ID, city.Name, city.CountryCode, city.District, city.Population, country.Code, country.Continent " +
+                    " FROM city,country WHERE city.CountryCode = country.Code and country.Continent = 'Asia' " +
+                    "ORDER BY city.Population DESC ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract employee information
+            ArrayList<city> city = new ArrayList<city>();
+            while (rset.next())
+            {
+                city ct = new city();
+                ct.ID = rset.getInt("city.ID");
+                ct.Name = rset.getString("city.Name");
+                ct.CountryCode = rset.getString("city.CountryCode");
+                ct.District = rset.getString("city.District");
+                ct.Population = rset.getInt("city.Population");
                 city.add(ct);
             }
             return city;
