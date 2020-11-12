@@ -104,7 +104,9 @@ public class App
             }
         }
     }
-
+    /**
+     * Gets all the countries.
+     */
     public ArrayList<country> getcountrydata()
     {
         try
@@ -137,7 +139,9 @@ public class App
             return null;
         }
     }
-
+    /**
+     * Gets all the countries with continent.
+     */
     public ArrayList<country> getcountryContinentdata()
     {
         try
@@ -170,6 +174,9 @@ public class App
             return null;
         }
     }
+    /**
+     * Gets all the countries with region.
+     */
     public ArrayList<country> getcountryregiondata()
     {
         try
@@ -203,8 +210,7 @@ public class App
         }
     }
     /**
-     * Gets all the current employees and salaries.
-     * @return A list of all employees and salaries, or null if there is an error.
+     * Gets all the cities from city.java.
      */
     public ArrayList<city> showcity()
     {
@@ -237,6 +243,9 @@ public class App
             return null;
         }
     }
+    /**
+     * Gets all the cities with country continent.
+     */
     public ArrayList<city> showcitywithcontinent()
     {
         try
@@ -270,6 +279,9 @@ public class App
             return null;
         }
     }
+    /**
+     * Print a list of countries.
+     */
     public void PrintCountrylist (ArrayList<country> country)
     {
         // Print header
@@ -285,8 +297,7 @@ public class App
         System.out.println("----XXX----\n\n");
     }
     /**
-     * Prints a list of employees.
-     * @param city The list of employees to print.
+     * Prints a list of cities
      */
     public void outputcity(ArrayList<city> city)
     {
