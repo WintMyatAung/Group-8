@@ -1,6 +1,6 @@
 package com.napier.sem;
 
-public class Country {
+public class country {
     public String code;
     public String name;
     public String Con;
