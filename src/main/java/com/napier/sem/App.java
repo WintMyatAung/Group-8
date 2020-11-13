@@ -44,11 +44,11 @@ public class App
         System.out.println("Table countries sorted by Largest Population to Smallest Population of a Region \n");
         a.PrintCountrylist(region);
 
-        System.out.println("Top 5 populated countries in a Continent.......");
-        a.PrintCountrylist(pcountry_continent);
-
         System.out.println("Top 5 populated countries in the world.......");
         a.PrintCountrylist(pcountry_world);
+
+        System.out.println("Top 5 populated countries in a Continent.......");
+        a.PrintCountrylist(pcountry_continent);
 
         System.out.println("Top 5 populated countries in a Region.......");
         a.PrintCountrylist(pcountry_region);
@@ -66,7 +66,7 @@ public class App
         a.outputcity(city);
 
         System.out.println("Table cities sorted by Largest Population to Smallest Population of a Continent \n");
-        .outputcity(citycontinent);
+        a.outputcity(citycontinent);
 
         // Disconnect from database
         a.disconnect();
