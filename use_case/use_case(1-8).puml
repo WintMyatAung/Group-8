@@ -3,28 +3,28 @@ left to right direction
 actor User as "User"
 
 rectangle "Function" {
-    usecase UC1a as "Output the sorted
+    usecase UC1a as "display the sorted
     country population"
 
-    usecase UC2a as "Output the sorted
+    usecase UC2a as "display the sorted
     country population by continent"
 
-    usecase UC3a as "Output the sorted
+    usecase UC3a as "display the sorted
     country population by region"
 
-    usecase UC4a as "Output the top 5
+    usecase UC4a as "display the top 5
     country population"
 
-    usecase UC5a as "Output the top 5
+    usecase UC5a as "display the top 5
     country population by continent"
 
-    usecase UC6a as "Output the top 5
+    usecase UC6a as "display the top 5
     country population by region"
 
-    usecase UC7a as "Output the sorted
+    usecase UC7a as "display the sorted
     city population"
 
-    usecase UC8a as "Output the sorted
+    usecase UC8a as "display the sorted
     city population by continent"
 
     User --> UC1a
