@@ -156,12 +156,12 @@ public class App
             while (rset.next())
             {
                 com.napier.sem.country cou = new country();
-                cou.code = rset.getString("country.Code");
-                cou.name = rset.getString("country.Name");
-                cou.Con = rset.getString("country.Continent");
-                cou.Reg = rset.getString("country.Region");
-                cou.Pop = rset.getInt("country.Population");
-                cou.cap = rset.getString("city.Name");
+                cou.setcode(rset.getString("country.Code"));
+                cou.setname(rset.getString("country.Name"));
+                cou.setCon(rset.getString("country.Continent"));
+                cou.setReg(rset.getString("country.Region"));
+                cou.setPop(rset.getInt("country.Population"));
+                cou.setcap(rset.getString("city.Name"));
                 country.add(cou);
             }
             return country;
@@ -193,12 +193,12 @@ public class App
             while (rset.next())
             {
                 com.napier.sem.country cou = new country();
-                cou.code = rset.getString("country.Code");
-                cou.name = rset.getString("country.Name");
-                cou.Con = rset.getString("country.Continent");
-                cou.Reg = rset.getString("country.Region");
-                cou.Pop = rset.getInt("country.Population");
-                cou.cap = rset.getString("city.Name");
+                cou.setcode(rset.getString("country.Code"));
+                cou.setname(rset.getString("country.Name"));
+                cou.setCon(rset.getString("country.Continent"));
+                cou.setReg(rset.getString("country.Region"));
+                cou.setPop(rset.getInt("country.Population"));
+                cou.setcap(rset.getString("city.Name"));
                 country.add(cou);
             }
             return country;
@@ -231,12 +231,12 @@ public class App
             while (rset.next())
             {
                 com.napier.sem.country cou = new country();
-                cou.code = rset.getString("country.Code");
-                cou.name = rset.getString("country.Name");
-                cou.Con = rset.getString("country.Continent");
-                cou.Reg = rset.getString("country.Region");
-                cou.Pop = rset.getInt("country.Population");
-                cou.cap = rset.getString("city.Name");
+                cou.setcode(rset.getString("country.Code"));
+                cou.setname(rset.getString("country.Name"));
+                cou.setCon(rset.getString("country.Continent"));
+                cou.setReg(rset.getString("country.Region"));
+                cou.setPop(rset.getInt("country.Population"));
+                cou.setcap(rset.getString("city.Name"));
                 country.add(cou);
             }
             return country;
@@ -265,12 +265,12 @@ public class App
             while (rs.next())
             {
                 com.napier.sem.country country = new country();
-                country.code = rs.getString("country.Code");
-                country.name = rs.getString("country.Name");
-                country.Con = rs.getString("country.Continent");
-                country.Reg = rs.getString("country.Region");
-                country.Pop = rs.getInt("country.Population");
-                country.cap = rs.getString("city.Name");
+                country.setcode(rs.getString("country.Code"));
+                country.setname(rs.getString("country.Name"));
+                country.setCon(rs.getString("country.Continent"));
+                country.setReg(rs.getString("country.Region"));
+                country.setPop(rs.getInt("country.Population"));
+                country.setcap(rs.getString("city.Name"));
                 pcountry_world.add(country);
             }
             return pcountry_world;
@@ -314,12 +314,12 @@ public class App
             while (rs.next())
             {
                 com.napier.sem.country country = new country();
-                country.code = rs.getString("country.Code");
-                country.name = rs.getString("country.Name");
-                country.Con = rs.getString("country.Continent");
-                country.Reg = rs.getString("country.Region");
-                country.Pop = rs.getInt("country.Population");
-                country.cap = rs.getString("city.Name");
+                country.setcode(rs.getString("country.Code"));
+                country.setname(rs.getString("country.Name"));
+                country.setCon(rs.getString("country.Continent"));
+                country.setReg(rs.getString("country.Region"));
+                country.setPop(rs.getInt("country.Population"));
+                country.setcap(rs.getString("city.Name"));
                 pcountry_continent.add(country);
             }
             return pcountry_continent;
@@ -358,12 +358,12 @@ public class App
             while (rs.next())
             {
                 com.napier.sem.country country = new country();
-                country.code = rs.getString("country.Code");
-                country.name = rs.getString("country.Name");
-                country.Con = rs.getString("country.Continent");
-                country.Reg = rs.getString("country.Region");
-                country.Pop = rs.getInt("country.Population");
-                country.cap = rs.getString("city.Name");
+                country.setcode(rs.getString("country.Code"));
+                country.setname(rs.getString("country.Name"));
+                country.setCon(rs.getString("country.Continent"));
+                country.setReg(rs.getString("country.Region"));
+                country.setPop(rs.getInt("country.Population"));
+                country.setcap(rs.getString("city.Name"));
                 pcountry_region.add(country);
             }
             return pcountry_region;
@@ -399,11 +399,11 @@ public class App
             while (rset.next())
             {
                 city ct = new city();
-                ct.ID = rset.getInt("ID");
-                ct.Name = rset.getString("Name");
-                ct.CountryCode = rset.getString("CountryCode");
-                ct.District = rset.getString("District");
-                ct.Population = rset.getInt("Population");
+                ct.setID(rset.getInt("ID"));
+                ct.setName(rset.getString("Name"));
+                ct.setCountryCode(rset.getString("CountryCode"));
+                ct.setDistrict(rset.getString("District"));
+                ct.setPopulation(rset.getInt("Population"));
                 city.add(ct);
             }
             return city;
@@ -435,11 +435,11 @@ public class App
             while (rset.next())
             {
                 city ct = new city();
-                ct.ID = rset.getInt("city.ID");
-                ct.Name = rset.getString("city.Name");
-                ct.CountryCode = rset.getString("city.CountryCode");
-                ct.District = rset.getString("city.District");
-                ct.Population = rset.getInt("city.Population");
+                ct.setID(rset.getInt("city.ID"));
+                ct.setName(rset.getString("city.Name"));
+                ct.setCountryCode(rset.getString("city.CountryCode"));
+                ct.setDistrict(rset.getString("city.District"));
+                ct.setPopulation(rset.getInt("city.Population"));
                 city.add(ct);
             }
             return city;
@@ -466,7 +466,13 @@ public class App
         // Loop over all Country in the list
         for (com.napier.sem.country cou : country)
         {
-            String countrystring = String.format("%-5s %-50s %-15s %-30s %-25s %-20s", cou.code, cou.name, cou.Con, cou.Reg, cou.Pop, cou.cap);
+            String code = cou.getcode();
+            String name = cou.getname();
+            String Con = cou.getCon();
+            String Reg = cou.getReg();
+            int Pop = cou.getPop();
+            String cap = cou.getcap();
+            String countrystring = String.format("%-5s %-50s %-15s %-30s %-25s %-20s", code, name, Con, Reg, Pop, cap);
             System.out.println(countrystring);
         }
         for (int j = 1; j <= 25; j+=1)
@@ -487,9 +493,13 @@ public class App
         System.out.println(String.format("%-40s %-20s %-40s %-30s", "____", "___________", "________", "__________"));
         // Loop over all City in the list
         for (city ct : city) {
+            String Name = ct.getName();
+            String CountryCode = ct.getCountryCode();
+            String District = ct.getDistrict();
+            int Population = ct.getPopulation();
             String ct_string =
                     String.format("%-40s %-20s %-40s %-30s",
-                            ct.Name, ct.CountryCode, ct.District, ct.Population);
+                            Name, CountryCode, District, Population);
             System.out.println(ct_string);
         }
         for (int i = 1; i <= 25; i = i +1)
