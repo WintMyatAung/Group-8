@@ -23,6 +23,9 @@ public class App
         //  Get the population of country region in order from largest to smallest
         ArrayList<country> region = a.getcountryregiondata();
 
+        //  Get top 5 populated countries in the world
+        ArrayList<country> pcountry_world = a.getPopulatedCountries_data();
+
         //  Get top 5 populated countries in a Continent
         ArrayList<country> pcountry_continent = a.getPopulatedCountriesContinent_data();
 
@@ -44,6 +47,9 @@ public class App
         System.out.println("Top 5 populated countries in a Continent.......");
         a.PrintCountrylist(pcountry_continent);
 
+        System.out.println("Top 5 populated countries in the world.......");
+        a.PrintCountrylist(pcountry_world);
+
         System.out.println("Top 5 populated countries in a Region.......");
         a.PrintCountrylist(pcountry_region);
 
@@ -60,7 +66,7 @@ public class App
         a.outputcity(city);
 
         System.out.println("Table cities sorted by Largest Population to Smallest Population of a Continent \n");
-        a.outputcity(citycontinent);
+        .outputcity(citycontinent);
 
         // Disconnect from database
         a.disconnect();
@@ -241,6 +247,40 @@ public class App
             System.out.println("Failed to get Country details by region");
             return null;
         }
+    }
+
+    public ArrayList<country> getPopulatedCountries_data() {
+
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String query ="select country.Code,country.Name,country.Continent,country.Region,country.Population,city.Name FROM country,city where country.Capital = city.ID order by country.Population desc limit 5";
+
+            // Execute SQL statement
+            ResultSet rs = stmt.executeQuery(query);
+
+            ArrayList<country> pcountry_world = new ArrayList<com.napier.sem.country>();
+            while (rs.next())
+            {
+                com.napier.sem.country country = new country();
+                country.code = rs.getString("country.Code");
+                country.name = rs.getString("country.Name");
+                country.Con = rs.getString("country.Continent");
+                country.Reg = rs.getString("country.Region");
+                country.Pop = rs.getInt("country.Population");
+                country.cap = rs.getString("city.Name");
+                pcountry_world.add(country);
+            }
+            return pcountry_world;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Populated Countries in details");
+        }
+        return null;
     }
     //  Bhone Thet Aung [40478627]  //
 
