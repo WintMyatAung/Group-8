@@ -1,0 +1,54 @@
+@startuml
+
+actor User as "User"
+
+rectangle Database
+
+rectangle "Country display" {
+    usecase UC1 as "get the
+    country information"
+
+    usecase UC1a as "Output the sorted
+    country population"
+
+    usecase UC2a as "Output the sorted
+    country population by continent"
+
+    usecase UC3a as "Output the sorted
+    country population by region"
+
+    usecase UC4a as "Output the top 5
+    country population"
+
+    usecase UC5a as "Output the top 5
+    country population by continent"
+
+    usecase UC6a as "Output the top 5
+    country population by region"
+
+    User - UC1
+    UC1 ..> UC1a : include
+    UC1 ..> UC2a : include
+    UC1 ..> UC3a : include
+    UC1 ..> UC4a : include
+    UC1 ..> UC5a : include
+    UC1 ..> UC6a : include
+    UC1 - Database
+}
+
+rectangle "City display" {
+    usecase UC2 as "get the
+    city information"
+
+    usecase UC7a as "Output the sorted
+    city population"
+
+    usecase UC8a as "Output the sorted
+    city population by continent"
+
+    User - UC2
+    UC2 ..> UC7a : include
+    UC2 ..> UC8a : include
+    UC2 - Database
+}
+@enduml
