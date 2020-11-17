@@ -1,6 +1,6 @@
 package com.napier.sem;
 
-public class city {
+public class City {
 
     private int ID;
     public int getID(){

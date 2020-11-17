@@ -15,58 +15,58 @@ public class App
         a.connect();
 
         //  Get the largest to smallest population by country
-        ArrayList<country> country = a.getcountrydata();
+        ArrayList<Country> country = a.getCountryData();
 
         //  Get the largest to smallest population by country continent
-        ArrayList<country> countrycc = a.getcountryContinentdata();
+        ArrayList<Country> countrycc = a.getCountryContinentData();
 
         //  Get the population of country region in order from largest to smallest
-        ArrayList<country> region = a.getcountryregiondata();
+        ArrayList<Country> region = a.getCountryRegionData();
 
         //  Get top 5 populated countries in the world
-        ArrayList<country> pcountry_world = a.getPopulatedCountries_data();
+        ArrayList<Country> pcountry_world = a.getPopulatedCountries_data();
 
         //  Get top 5 populated countries in a Continent
-        ArrayList<country> pcountry_continent = a.getPopulatedCountriesContinent_data();
+        ArrayList<Country> pcountry_continent = a.getPopulatedCountriesContinent_data();
 
         //  Get top 5 populated countries in a Region
-        ArrayList<country> pcountry_region = a.getPopulatedCountriesRegion_data();
+        ArrayList<Country> pcountry_region = a.getPopulatedCountriesRegion_data();
 
 
 
         // output the country array list
         System.out.println("Table countries sorted by Largest Population to Smallest Population \n");
-        a.PrintCountrylist(country);
+        a.PrintCountryList(country);
 
         System.out.println("Table countries sorted by Largest Population to Smallest Population of a Continent \n");
-        a.PrintCountrylist(countrycc);
+        a.PrintCountryList(countrycc);
 
         System.out.println("Table countries sorted by Largest Population to Smallest Population of a Region \n");
-        a.PrintCountrylist(region);
+        a.PrintCountryList(region);
 
         System.out.println("Top 5 populated countries in the world.......");
-        a.PrintCountrylist(pcountry_world);
+        a.PrintCountryList(pcountry_world);
 
         System.out.println("Top 5 populated countries in a Continent.......");
-        a.PrintCountrylist(pcountry_continent);
+        a.PrintCountryList(pcountry_continent);
 
         System.out.println("Top 5 populated countries in a Region.......");
-        a.PrintCountrylist(pcountry_region);
+        a.PrintCountryList(pcountry_region);
 
 
 
         //  Get the largest to smallest population by city
-        ArrayList<city> city = a.showcity();
+        ArrayList<City> city = a.showCity();
 
         //  Get the largest to smallest population by city continent
-        ArrayList<city> citycontinent = a.showcitywithcontinent();
+        ArrayList<City> citycontinent = a.showCityWithContinent();
 
         // Output the city array list
         System.out.println("Table cities sorted by Largest Population to Smallest Population \n");
-        a.outputcity(city);
+        a.outputCity(city);
 
         System.out.println("Table cities sorted by Largest Population to Smallest Population of a Continent \n");
-        a.outputcity(citycontinent);
+        a.outputCity(citycontinent);
 
         // Disconnect from database
         a.disconnect();
@@ -141,7 +141,7 @@ public class App
      * Gets all the countries.
      * Aung Khant Paing [40478639]
      */
-    public ArrayList<country> getcountrydata()
+    public ArrayList<Country> getCountryData()
     {
         try
         {
@@ -152,10 +152,10 @@ public class App
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(query);
             // Extract Country detail information
-            ArrayList<country> country = new ArrayList<com.napier.sem.country>();
+            ArrayList<Country> country = new ArrayList<com.napier.sem.Country>();
             while (rset.next())
             {
-                com.napier.sem.country cou = new country();
+                com.napier.sem.Country cou = new Country();
                 cou.setcode(rset.getString("country.Code"));
                 cou.setname(rset.getString("country.Name"));
                 cou.setCon(rset.getString("country.Continent"));
@@ -178,7 +178,7 @@ public class App
      * Gets all the countries with continent.
      * Aung Khant Paing[40478639]
      */
-    public ArrayList<country> getcountryContinentdata()
+    public ArrayList<Country> getCountryContinentData()
     {
         try
         {
@@ -189,10 +189,10 @@ public class App
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(query1);
             // Extract Country detail information
-            ArrayList<country> country = new ArrayList<com.napier.sem.country>();
+            ArrayList<Country> country = new ArrayList<com.napier.sem.Country>();
             while (rset.next())
             {
-                com.napier.sem.country cou = new country();
+                com.napier.sem.Country cou = new Country();
                 cou.setcode(rset.getString("country.Code"));
                 cou.setname(rset.getString("country.Name"));
                 cou.setCon(rset.getString("country.Continent"));
@@ -216,7 +216,7 @@ public class App
     /**
      * Gets all the countries with region.
      */
-    public ArrayList<country> getcountryregiondata()
+    public ArrayList<Country> getCountryRegionData()
     {
         try
         {
@@ -227,10 +227,10 @@ public class App
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(query);
             // Extract Country detail information
-            ArrayList<country> country = new ArrayList<com.napier.sem.country>();
+            ArrayList<Country> country = new ArrayList<com.napier.sem.Country>();
             while (rset.next())
             {
-                com.napier.sem.country cou = new country();
+                com.napier.sem.Country cou = new Country();
                 cou.setcode(rset.getString("country.Code"));
                 cou.setname(rset.getString("country.Name"));
                 cou.setCon(rset.getString("country.Continent"));
@@ -249,7 +249,7 @@ public class App
         }
     }
 
-    public ArrayList<country> getPopulatedCountries_data() {
+    public ArrayList<Country> getPopulatedCountries_data() {
 
         try {
             // Create an SQL statement
@@ -261,10 +261,10 @@ public class App
             // Execute SQL statement
             ResultSet rs = stmt.executeQuery(query);
 
-            ArrayList<country> pcountry_world = new ArrayList<com.napier.sem.country>();
+            ArrayList<Country> pcountry_world = new ArrayList<com.napier.sem.Country>();
             while (rs.next())
             {
-                com.napier.sem.country country = new country();
+                com.napier.sem.Country country = new Country();
                 country.setcode(rs.getString("country.Code"));
                 country.setname(rs.getString("country.Name"));
                 country.setCon(rs.getString("country.Continent"));
@@ -287,7 +287,7 @@ public class App
 
     //  Wint Myat Aung [40478650]  //
     //**  Get top 5 populated countries in a Continent  **//
-    public ArrayList<country> getPopulatedCountriesContinent_data() {
+    public ArrayList<Country> getPopulatedCountriesContinent_data() {
         //  System.out.println("Top 5 populated countries in a continent.......");
 
         Scanner scan = new Scanner(System.in);
@@ -310,10 +310,10 @@ public class App
             // Execute SQL statement
             ResultSet rs = stmt.executeQuery(query);
 
-            ArrayList<country> pcountry_continent = new ArrayList<com.napier.sem.country>();
+            ArrayList<Country> pcountry_continent = new ArrayList<com.napier.sem.Country>();
             while (rs.next())
             {
-                com.napier.sem.country country = new country();
+                com.napier.sem.Country country = new Country();
                 country.setcode(rs.getString("country.Code"));
                 country.setname(rs.getString("country.Name"));
                 country.setCon(rs.getString("country.Continent"));
@@ -335,7 +335,7 @@ public class App
 
 
     //**  Get top 5 populated countries in a Region  **//
-    public ArrayList<country> getPopulatedCountriesRegion_data() {
+    public ArrayList<Country> getPopulatedCountriesRegion_data() {
         Scanner scan = new Scanner(System.in);
         //  System.out.print("Please enter a Region: ");
         //  String Reg = scan.nextLine();
@@ -354,10 +354,10 @@ public class App
             // Execute SQL statement
             ResultSet rs = stmt.executeQuery(query);
 
-            ArrayList<country> pcountry_region = new ArrayList<com.napier.sem.country>();
+            ArrayList<Country> pcountry_region = new ArrayList<com.napier.sem.Country>();
             while (rs.next())
             {
-                com.napier.sem.country country = new country();
+                com.napier.sem.Country country = new Country();
                 country.setcode(rs.getString("country.Code"));
                 country.setname(rs.getString("country.Name"));
                 country.setCon(rs.getString("country.Continent"));
@@ -384,7 +384,7 @@ public class App
      * Gets all the cities from city.java.
      */
     //  Shine Htet Oo [40478643]  //
-    public ArrayList<city> showcity()
+    public ArrayList<City> showCity()
     {
         try
         {
@@ -395,10 +395,10 @@ public class App
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract City information
-            ArrayList<city> city = new ArrayList<city>();
+            ArrayList<City> city = new ArrayList<City>();
             while (rset.next())
             {
-                city ct = new city();
+                City ct = new City();
                 ct.setID(rset.getInt("ID"));
                 ct.setName(rset.getString("Name"));
                 ct.setCountryCode(rset.getString("CountryCode"));
@@ -418,7 +418,7 @@ public class App
     /**
      * Gets all the cities with country continent.
      */
-    public ArrayList<city> showcitywithcontinent()
+    public ArrayList<City> showCityWithContinent()
     {
         try
         {
@@ -431,10 +431,10 @@ public class App
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract City information
-            ArrayList<city> city = new ArrayList<city>();
+            ArrayList<City> city = new ArrayList<City>();
             while (rset.next())
             {
-                city ct = new city();
+                City ct = new City();
                 ct.setID(rset.getInt("city.ID"));
                 ct.setName(rset.getString("city.Name"));
                 ct.setCountryCode(rset.getString("city.CountryCode"));
@@ -458,13 +458,13 @@ public class App
      * Print a list of countries.
      * Aung Khant Paing [40478639]
      */
-    public void PrintCountrylist (ArrayList<country> country)
+    public void PrintCountryList(ArrayList<Country> country)
     {
         // Print header
         System.out.println(String.format("%-5s %-50s %-15s %-30s %-25s %-20s","Code", "Name", "Continent", "Region", "Population", "Capital"));
         System.out.println(String.format("%-5s %-50s %-15s %-30s %-25s %-20s","----", "----", "---------", "------", "----------", "-------"));
         // Loop over all Country in the list
-        for (com.napier.sem.country cou : country)
+        for (com.napier.sem.Country cou : country)
         {
             String code = cou.getcode();
             String name = cou.getname();
@@ -487,12 +487,12 @@ public class App
     /**
      * Prints a list of cities
      */
-    public void outputcity(ArrayList<city> city) {
+    public void outputCity(ArrayList<City> city) {
         // Print header
         System.out.println(String.format("%-40s %-20s %-40s %-30s", "Name", "CountryCode", "District", "Population"));
         System.out.println(String.format("%-40s %-20s %-40s %-30s", "____", "___________", "________", "__________"));
         // Loop over all City in the list
-        for (city ct : city) {
+        for (City ct : city) {
             String Name = ct.getName();
             String CountryCode = ct.getCountryCode();
             String District = ct.getDistrict();
