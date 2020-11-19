@@ -61,12 +61,24 @@ public class App
         //  Get the largest to smallest population by city continent
         ArrayList<City> citycontinent = a.showCityWithContinent();
 
+        //  Get top 5 populated city listed by country name
+        ArrayList<City> cityname = a.showCityWithCountryNameTop();
+
+        //  Get top 5 populated city listed by city District
+        ArrayList<City> citydistrict = a.showCityWithDistrictTop();
+
         // Output the city array list
         System.out.println("Table cities sorted by Largest Population to Smallest Population \n");
         a.outputCity(city);
 
         System.out.println("Table cities sorted by Largest Population to Smallest Population of a Continent \n");
         a.outputCity(citycontinent);
+
+        System.out.println("Top 5 populated city listed by country name \n");
+        a.outputCity(cityname);
+
+        System.out.println("Top 5 populated city listed by city District \n");
+        a.outputCity(citydistrict);
 
         // Disconnect from database
         a.disconnect();
@@ -453,6 +465,78 @@ public class App
     }
     //  Shine Htet Oo [40478643]  //
 
+    /**
+     * Gets all the cities with country Name Top 5.
+     * Aung Khant Paing [40478639]
+     */
+    public ArrayList<City> showCityWithCountryNameTop()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect = "SELECT city.ID, city.Name, city.CountryCode, city.District, city.Population FROM city,country WHERE city.CountryCode = country.Code and country.Name = 'China'  ORDER BY city.Population DESC limit 5 ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract City information
+            ArrayList<City> city = new ArrayList<City>();
+            while (rset.next())
+            {
+                City ct = new City();
+                ct.setID(rset.getInt("city.ID"));
+                ct.setName(rset.getString("city.Name"));
+                ct.setCountryCode(rset.getString("city.CountryCode"));
+                ct.setDistrict(rset.getString("city.District"));
+                ct.setPopulation(rset.getInt("city.Population"));
+                city.add(ct);
+            }
+            return city;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city information by country name");
+            return null;
+        }
+    }
+
+    /**
+     * Gets all the cities with City District Top 5.
+     * Aung Khant Paing [40478639]
+     */
+    public ArrayList<City> showCityWithDistrictTop()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect = "SELECT ID, Name, CountryCode, District, Population FROM city WHERE District = 'Liaoning' ORDER BY Population DESC limit 5 ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract City information
+            ArrayList<City> city = new ArrayList<City>();
+            while (rset.next())
+            {
+                City ct = new City();
+                ct.setID(rset.getInt("city.ID"));
+                ct.setName(rset.getString("city.Name"));
+                ct.setCountryCode(rset.getString("city.CountryCode"));
+                ct.setDistrict(rset.getString("city.District"));
+                ct.setPopulation(rset.getInt("city.Population"));
+                city.add(ct);
+            }
+            return city;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city information by City District");
+            return null;
+        }
+    }
+
 
     /**
      * Print a list of countries.
@@ -481,7 +565,6 @@ public class App
         }
         System.out.println("\n\n");
     }
-
 
     //  Shine Htet Oo [40478643]  //
     /**
