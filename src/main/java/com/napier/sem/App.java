@@ -218,7 +218,7 @@ public class App
     /**
      * Gets top 5 populated cities in the world........
      * Wint Myat Aung [40478650]
-     **/
+    **/
     public ArrayList<City> showCityWithPopulation() {
         try {
             // Create an SQL statement
@@ -252,7 +252,7 @@ public class App
     /**
      * Gets all the countries.
      * Aung Khant Paing [40478639]
-     */
+    **/
     public ArrayList<Country> getCountryData()
     {
         try
@@ -286,10 +286,11 @@ public class App
         }
     }
 
+
     /**
      * Gets all the countries with continent.
      * Aung Khant Paing[40478639]
-     */
+    **/
     public ArrayList<Country> getCountryContinentData()
     {
         try
@@ -324,10 +325,10 @@ public class App
     }
 
 
-    //  Bhone Thet Aung [40478627]  //
     /**
      * Gets all the countries with region.
-     */
+     * Bhone Thet Aung [40478627]
+    **/
     public ArrayList<Country> getCountryRegionData()
     {
         try
@@ -361,6 +362,11 @@ public class App
         }
     }
 
+
+    /**
+     * Get top 5 populated countries in the world
+     * Bhone Thet Aung [40478627]
+    **/
     public ArrayList<Country> getPopulatedCountries_data() {
 
         try {
@@ -394,11 +400,12 @@ public class App
         }
         return null;
     }
-    //  Bhone Thet Aung [40478627]  //
 
 
-    //  Wint Myat Aung [40478650]  //
-    //**  Get top 5 populated countries in a Continent  **//
+    /**
+     * Get top 5 populated countries in a Continent
+     * Wint Myat Aung [40478650]
+    **/
     public ArrayList<Country> getPopulatedCountriesContinent_data() {
         //  System.out.println("Top 5 populated countries in a continent.......");
 
@@ -443,10 +450,12 @@ public class App
         }
         return null;
     }
-    //** ---- **//
 
 
-    //**  Get top 5 populated countries in a Region  **//
+    /**
+     * Get top 5 populated countries in a Region
+     * Wint Myat Aung [40478650]
+    **/
     public ArrayList<Country> getPopulatedCountriesRegion_data() {
         Scanner scan = new Scanner(System.in);
         //  System.out.print("Please enter a Region: ");
@@ -487,15 +496,12 @@ public class App
         }
         return null;
     }
-    //** ---- **//
-    //  Wint Myat Aung [40478650]  //
-
 
 
     /**
      * Gets all the cities from city.java.
-     */
-    //  Shine Htet Oo [40478643]  //
+     * Shine Htet Oo [40478643]
+    **/
     public ArrayList<City> showCity()
     {
         try
@@ -527,9 +533,12 @@ public class App
             return null;
         }
     }
+
+
     /**
      * Gets all the cities with country continent.
-     */
+     * Shine Htet Oo [40478643]
+    **/
     public ArrayList<City> showCityWithContinent()
     {
         try
@@ -563,7 +572,12 @@ public class App
             return null;
         }
     }
-    //  Shine Htet Oo [40478643]  //
+
+
+    /**
+     * Get populated city listed by country name
+     * Bhone Thet Aung [40478627]
+    **/
     public ArrayList<City> showCityCountryName()
     {
         try
@@ -595,6 +609,12 @@ public class App
             return null;
         }
     }
+
+
+    /**
+     * Get populated city listed by country region
+     * Bhone Thet Aung [40478627]
+    **/
     public ArrayList<City> showCityCountryRegion()
     {
         try
@@ -626,10 +646,12 @@ public class App
             return null;
         }
     }
+
+
     /**
      * Gets all the cities with country Name Top 5.
      * Aung Khant Paing [40478639]
-     */
+    **/
     public ArrayList<City> showCityWithCountryNameTop()
     {
         try
@@ -662,10 +684,11 @@ public class App
         }
     }
 
+
     /**
      * Gets all the cities with City District Top 5.
      * Aung Khant Paing [40478639]
-     */
+    **/
     public ArrayList<City> showCityWithDistrictTop()
     {
         try
@@ -698,9 +721,11 @@ public class App
         }
     }
 
+
     /**
      * Gets all the cities with country continent Top 5.
-     */
+     * Shine Htet Oo [40478643]
+    **/
     public ArrayList<City> showCityWithContinentTop()
     {
         try
@@ -733,9 +758,11 @@ public class App
         }
     }
 
+
     /**
      * Gets all the cities with country Region Top 5.
-     */
+     * Shine Htet Oo [40478643]
+    **/
     public ArrayList<City> showCityWithRegionTop()
     {
         try
@@ -768,10 +795,11 @@ public class App
         }
     }
 
+
     /**
      * Print a list of countries.
      * Aung Khant Paing [40478639]
-     */
+    **/
     public void PrintCountryList(ArrayList<Country> country)
     {
         // Print header
@@ -796,10 +824,11 @@ public class App
         System.out.println("\n\n");
     }
 
-    //  Shine Htet Oo [40478643]  //
+
     /**
      * Prints a list of cities
-     */
+     * Shine Htet Oo [40478643]
+    **/
     public void outputCity(ArrayList<City> city) {
         // Print header
         System.out.println(String.format("%-40s %-20s %-40s %-30s", "Name", "CountryCode", "District", "Population"));
