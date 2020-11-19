@@ -845,11 +845,20 @@ public class App
      * Shine Htet Oo [40478643]
     **/
     public void outputCity(ArrayList<City> city) {
+        // Check the Country data exit or not.
+        if (city == null)
+        {
+            System.out.println("Not getting the city data");
+            return;
+        }
         // Print header
         System.out.println(String.format("%-40s %-20s %-40s %-30s", "Name", "CountryCode", "District", "Population"));
         System.out.println(String.format("%-40s %-20s %-40s %-30s", "____", "___________", "________", "__________"));
         // Loop over all City in the list
         for (City ct : city) {
+            // Check the contains exit or not.
+            if (ct == null)
+                continue;
             String Name = ct.getName();
             String CountryCode = ct.getCountryCode();
             String District = ct.getDistrict();

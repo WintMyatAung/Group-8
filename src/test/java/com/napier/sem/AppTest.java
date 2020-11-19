@@ -16,6 +16,8 @@ public class AppTest {
     {
         app = new App();
     }
+
+    // Aung Khant Paing
     @Test
     void printCountryTestNull()
     {
@@ -35,5 +37,27 @@ public class AppTest {
     {
         ArrayList<Country> countries = new ArrayList<Country>();
         app.PrintCountryList(countries);
+    }
+
+    // Shine Htet Oo
+    @Test
+    void printCityTestNull()
+    {
+        app.outputCity(null);
+    }
+
+    @Test
+    void printCityTestContainsNull()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        cities.add(null);
+        app.outputCity(cities);
+    }
+
+    @Test
+    void printCityTestEmpty()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        app.outputCity(cities);
     }
 }
