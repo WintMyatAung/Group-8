@@ -67,6 +67,12 @@ public class App
         //  Get top 5 populated city listed by city District
         ArrayList<City> citydistrict = a.showCityWithDistrictTop();
 
+        //  Get top 5 populated city listed by country continent
+        ArrayList<City> citycontinenttop = a.showCityWithContinentTop();
+
+        //  Get top 5 populated city listed by country region
+        //ArrayList<City> cityregion = a.showCityWithRegionTop();
+
         // Output the city array list
         System.out.println("Table cities sorted by Largest Population to Smallest Population \n");
         a.outputCity(city);
@@ -79,6 +85,12 @@ public class App
 
         System.out.println("Top 5 populated city listed by city District \n");
         a.outputCity(citydistrict);
+
+        System.out.println("Top 5 populated city listed by country continent \n");
+        a.outputCity(citycontinenttop);
+
+        //System.out.println("Top 5 populated city listed by country region \n");
+        //a.outputCity(cityregion);
 
         // Disconnect from database
         a.disconnect();
@@ -537,6 +549,40 @@ public class App
         }
     }
 
+    /**
+     * Gets all the cities with country Name Top 5.
+     */
+    public ArrayList<City> showCityWithContinentTop()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect = "SELECT city.ID, city.Name, city.CountryCode, city.District, city.Population FROM city,country WHERE city.CountryCode = country.Code and country.Continent = 'Asia'  ORDER BY city.Population DESC limit 5 ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract City information
+            ArrayList<City> city = new ArrayList<City>();
+            while (rset.next())
+            {
+                City ct = new City();
+                ct.setID(rset.getInt("city.ID"));
+                ct.setName(rset.getString("city.Name"));
+                ct.setCountryCode(rset.getString("city.CountryCode"));
+                ct.setDistrict(rset.getString("city.District"));
+                ct.setPopulation(rset.getInt("city.Population"));
+                city.add(ct);
+            }
+            return city;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city information by country name");
+            return null;
+        }
+    }
 
     /**
      * Print a list of countries.
