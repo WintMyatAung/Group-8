@@ -105,11 +105,17 @@ public class App
         System.out.println("Top 5 populated city listed by country region \n");
         a.outputCity(cityregion);
 
+        System.out.println("populated city listed by country region \n");
+        a.outputCity(citycountryregion);
+
         System.out.println("populated city listed by country name \n");
         a.outputCity(citycountryname);
 
-        System.out.println("populated city listed by country region \n");
-        a.outputCity(citycountryregion);
+        System.out.println("Get the largest to smallest population by city District \n");
+        a.outputCity(cities_district);
+
+        System.out.println("Get top 5 populated city in the world \n");
+        a.outputCity(pcity_world);
 
         // Disconnect from database
         a.disconnect();
@@ -178,74 +184,6 @@ public class App
                 System.out.println("Error closing connection to database");
             }
         }
-    }
-
-
-    /**
-     * Gets all the cities in a district organised by largest population to smallest.
-     * Wint Myat Aung [40478650]
-    **/
-    public ArrayList<City> showCityWithDistrict() {
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-
-            // Create string for SQL statement
-            String query = "select Name,CountryCode,District,Population FROM city where District='Kabol' order by Population desc";
-
-            // Execute SQL statement
-            ResultSet rs = stmt.executeQuery(query);
-
-            ArrayList<City> cities_district = new ArrayList<City>();
-            while (rs.next()) {
-                City cities = new City();
-                cities.setID(rs.getInt("ID"));
-                cities.setName(rs.getString("Name"));
-                cities.setCountryCode(rs.getString("CountryCode"));
-                cities.setDistrict(rs.getString("District"));
-                cities.setPopulation(rs.getInt("Population"));
-                cities_district.add(cities);
-            }
-            return cities_district;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get Populated Cities in details");
-        }
-        return null;
-    }
-
-
-    /**
-     * Gets top 5 populated cities in the world........
-     * Wint Myat Aung [40478650]
-    **/
-    public ArrayList<City> showCityWithPopulation() {
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-
-            // Create string for SQL statement
-            String query = "select Name,CountryCode,District,Population FROM city where order by Population desc limit 5";
-
-            // Execute SQL statement
-            ResultSet rs = stmt.executeQuery(query);
-
-            ArrayList<City> pcity_world = new ArrayList<City>();
-            while (rs.next()) {
-                City cities = new City();
-                cities.setID(rs.getInt("ID"));
-                cities.setName(rs.getString("Name"));
-                cities.setCountryCode(rs.getString("CountryCode"));
-                cities.setDistrict(rs.getString("District"));
-                cities.setPopulation(rs.getInt("Population"));
-                pcity_world.add(cities);
-            }
-            return pcity_world;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get Populated Cities in details");
-        }
-        return null;
     }
 
 
@@ -575,6 +513,43 @@ public class App
 
 
     /**
+     * Get populated city listed by country region
+     * Bhone Thet Aung [40478627]
+    **/
+    public ArrayList<City> showCityCountryRegion()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect = "SELECT city.ID, city.Name, city.CountryCode, city.District, city.Population FROM city,country WHERE city.CountryCode = country.Code and country.Region = 'Southeast Asia'  ORDER BY city.Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract City information
+            ArrayList<City> city = new ArrayList<City>();
+            while (rset.next())
+            {
+                City ct = new City();
+                ct.setID(rset.getInt("city.ID"));
+                ct.setName(rset.getString("city.Name"));
+                ct.setCountryCode(rset.getString("city.CountryCode"));
+                ct.setDistrict(rset.getString("city.District"));
+                ct.setPopulation(rset.getInt("city.Population"));
+                city.add(ct);
+            }
+            return city;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city information by region");
+            return null;
+        }
+    }
+
+
+    /**
      * Get populated city listed by country name
      * Bhone Thet Aung [40478627]
     **/
@@ -612,17 +587,85 @@ public class App
 
 
     /**
-     * Get populated city listed by country region
-     * Bhone Thet Aung [40478627]
+     * Gets all the cities in a district organised by largest population to smallest.
+     * Wint Myat Aung [40478650]
     **/
-    public ArrayList<City> showCityCountryRegion()
+    public ArrayList<City> showCityWithDistrict() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String query = "select Name,CountryCode,District,Population FROM city where District='Kabol' order by Population desc";
+
+            // Execute SQL statement
+            ResultSet rs = stmt.executeQuery(query);
+
+            ArrayList<City> cities_district = new ArrayList<City>();
+            while (rs.next()) {
+                City cities = new City();
+                cities.setID(rs.getInt("ID"));
+                cities.setName(rs.getString("Name"));
+                cities.setCountryCode(rs.getString("CountryCode"));
+                cities.setDistrict(rs.getString("District"));
+                cities.setPopulation(rs.getInt("Population"));
+                cities_district.add(cities);
+            }
+            return cities_district;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Populated Cities in details");
+        }
+        return null;
+    }
+
+
+    /**
+     * Gets top 5 populated cities in the world........
+     * Wint Myat Aung [40478650]
+    **/
+    public ArrayList<City> showCityWithPopulation() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String query = "select Name,CountryCode,District,Population FROM city where order by Population desc limit 5";
+
+            // Execute SQL statement
+            ResultSet rs = stmt.executeQuery(query);
+
+            ArrayList<City> pcity_world = new ArrayList<City>();
+            while (rs.next()) {
+                City cities = new City();
+                cities.setID(rs.getInt("ID"));
+                cities.setName(rs.getString("Name"));
+                cities.setCountryCode(rs.getString("CountryCode"));
+                cities.setDistrict(rs.getString("District"));
+                cities.setPopulation(rs.getInt("Population"));
+                pcity_world.add(cities);
+            }
+            return pcity_world;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Populated Cities in details");
+        }
+        return null;
+    }
+
+
+    /**
+     * Gets all the cities with country continent Top 5.
+     * Shine Htet Oo [40478643]
+    **/
+    public ArrayList<City> showCityWithContinentTop()
     {
         try
         {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
-            String strSelect = "SELECT city.ID, city.Name, city.CountryCode, city.District, city.Population FROM city,country WHERE city.CountryCode = country.Code and country.Region = 'Southeast Asia'  ORDER BY city.Population DESC";
+            String strSelect = "SELECT city.ID, city.Name, city.CountryCode, city.District, city.Population FROM city,country WHERE city.CountryCode = country.Code and country.Continent = 'Asia'  ORDER BY city.Population DESC limit 5 ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract City information
@@ -642,7 +685,44 @@ public class App
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get city information by region");
+            System.out.println("Failed to get city information by country name");
+            return null;
+        }
+    }
+
+
+    /**
+     * Gets all the cities with country Region Top 5.
+     * Shine Htet Oo [40478643]
+    **/
+    public ArrayList<City> showCityWithRegionTop()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect = "SELECT city.ID, city.Name, city.CountryCode, city.District, city.Population FROM city,country WHERE city.CountryCode = country.Code and country.Region = 'Central Africa'  ORDER BY city.Population DESC limit 5 ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract City information
+            ArrayList<City> city = new ArrayList<City>();
+            while (rset.next())
+            {
+                City ct = new City();
+                ct.setID(rset.getInt("city.ID"));
+                ct.setName(rset.getString("city.Name"));
+                ct.setCountryCode(rset.getString("city.CountryCode"));
+                ct.setDistrict(rset.getString("city.District"));
+                ct.setPopulation(rset.getInt("city.Population"));
+                city.add(ct);
+            }
+            return city;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city information by country name");
             return null;
         }
     }
@@ -717,80 +797,6 @@ public class App
         {
             System.out.println(e.getMessage());
             System.out.println("Failed to get city information by City District");
-            return null;
-        }
-    }
-
-
-    /**
-     * Gets all the cities with country continent Top 5.
-     * Shine Htet Oo [40478643]
-    **/
-    public ArrayList<City> showCityWithContinentTop()
-    {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect = "SELECT city.ID, city.Name, city.CountryCode, city.District, city.Population FROM city,country WHERE city.CountryCode = country.Code and country.Continent = 'Asia'  ORDER BY city.Population DESC limit 5 ";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract City information
-            ArrayList<City> city = new ArrayList<City>();
-            while (rset.next())
-            {
-                City ct = new City();
-                ct.setID(rset.getInt("city.ID"));
-                ct.setName(rset.getString("city.Name"));
-                ct.setCountryCode(rset.getString("city.CountryCode"));
-                ct.setDistrict(rset.getString("city.District"));
-                ct.setPopulation(rset.getInt("city.Population"));
-                city.add(ct);
-            }
-            return city;
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city information by country name");
-            return null;
-        }
-    }
-
-
-    /**
-     * Gets all the cities with country Region Top 5.
-     * Shine Htet Oo [40478643]
-    **/
-    public ArrayList<City> showCityWithRegionTop()
-    {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect = "SELECT city.ID, city.Name, city.CountryCode, city.District, city.Population FROM city,country WHERE city.CountryCode = country.Code and country.Region = 'Central Africa'  ORDER BY city.Population DESC limit 5 ";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract City information
-            ArrayList<City> city = new ArrayList<City>();
-            while (rset.next())
-            {
-                City ct = new City();
-                ct.setID(rset.getInt("city.ID"));
-                ct.setName(rset.getString("city.Name"));
-                ct.setCountryCode(rset.getString("city.CountryCode"));
-                ct.setDistrict(rset.getString("city.District"));
-                ct.setPopulation(rset.getInt("city.Population"));
-                city.add(ct);
-            }
-            return city;
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city information by country name");
             return null;
         }
     }
