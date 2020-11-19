@@ -780,12 +780,21 @@ public class App
      */
     public void PrintCountryList(ArrayList<Country> country)
     {
+        // Check the Country data exit or not.
+        if (country == null)
+        {
+            System.out.println("Not getting the country data");
+            return;
+        }
         // Print header
         System.out.println(String.format("%-5s %-50s %-15s %-30s %-25s %-20s","Code", "Name", "Continent", "Region", "Population", "Capital"));
         System.out.println(String.format("%-5s %-50s %-15s %-30s %-25s %-20s","----", "----", "---------", "------", "----------", "-------"));
         // Loop over all Country in the list
         for (com.napier.sem.Country cou : country)
         {
+            // Check the contains exit or not.
+            if (cou == null)
+                continue;
             String code = cou.getcode();
             String name = cou.getname();
             String Con = cou.getCon();
