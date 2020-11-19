@@ -73,6 +73,12 @@ public class App
         //  Get top 5 populated city listed by country region
         ArrayList<City> cityregion = a.showCityWithRegionTop();
 
+        //  Get populated city listed by country name
+        ArrayList<City> citycountryname = a.showCityCountryName();
+
+        //  Get populated city listed by country region
+        ArrayList<City> citycountryregion = a.showCityCountryRegion();
+
         //  Get the largest to smallest population by city District
         ArrayList<City> cities_district = a.showCityWithDistrict();
 
@@ -98,6 +104,12 @@ public class App
 
         System.out.println("Top 5 populated city listed by country region \n");
         a.outputCity(cityregion);
+
+        System.out.println("populated city listed by country name \n");
+        a.outputCity(citycountryname);
+
+        System.out.println("populated city listed by country region \n");
+        a.outputCity(citycountryregion);
 
         // Disconnect from database
         a.disconnect();
@@ -552,7 +564,68 @@ public class App
         }
     }
     //  Shine Htet Oo [40478643]  //
-
+    public ArrayList<City> showCityCountryName()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect = "SELECT city.ID, city.Name, city.CountryCode, city.District, city.Population FROM city,country WHERE city.CountryCode = country.Code and country.Name = 'Thailand'  ORDER BY city.Population DESC ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract City information
+            ArrayList<City> city = new ArrayList<City>();
+            while (rset.next())
+            {
+                City ct = new City();
+                ct.setID(rset.getInt("city.ID"));
+                ct.setName(rset.getString("city.Name"));
+                ct.setCountryCode(rset.getString("city.CountryCode"));
+                ct.setDistrict(rset.getString("city.District"));
+                ct.setPopulation(rset.getInt("city.Population"));
+                city.add(ct);
+            }
+            return city;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city information by name");
+            return null;
+        }
+    }
+    public ArrayList<City> showCityCountryRegion()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect = "SELECT city.ID, city.Name, city.CountryCode, city.District, city.Population FROM city,country WHERE city.CountryCode = country.Code and country.Region = 'Southeast Asia'  ORDER BY city.Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract City information
+            ArrayList<City> city = new ArrayList<City>();
+            while (rset.next())
+            {
+                City ct = new City();
+                ct.setID(rset.getInt("city.ID"));
+                ct.setName(rset.getString("city.Name"));
+                ct.setCountryCode(rset.getString("city.CountryCode"));
+                ct.setDistrict(rset.getString("city.District"));
+                ct.setPopulation(rset.getInt("city.Population"));
+                city.add(ct);
+            }
+            return city;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city information by region");
+            return null;
+        }
+    }
     /**
      * Gets all the cities with country Name Top 5.
      * Aung Khant Paing [40478639]
