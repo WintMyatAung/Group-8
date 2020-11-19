@@ -77,7 +77,7 @@ public class App
         ArrayList<City> cities_district = a.showCityWithDistrict();
 
         //  Get top 5 populated city in the world
-//        ArrayList<City> pcity_world = a.showCityWithPopulation();
+        ArrayList<City> pcity_world = a.showCityWithPopulation();
 
 
         // Output the city array list
@@ -195,6 +195,40 @@ public class App
                 cities_district.add(cities);
             }
             return cities_district;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Populated Cities in details");
+        }
+        return null;
+    }
+
+
+    /**
+     * Gets top 5 populated cities in the world........
+     * Wint Myat Aung [40478650]
+     **/
+    public ArrayList<City> showCityWithPopulation() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String query = "select Name,CountryCode,District,Population FROM city where order by Population desc limit 5";
+
+            // Execute SQL statement
+            ResultSet rs = stmt.executeQuery(query);
+
+            ArrayList<City> pcity_world = new ArrayList<City>();
+            while (rs.next()) {
+                City cities = new City();
+                cities.setID(rs.getInt("ID"));
+                cities.setName(rs.getString("Name"));
+                cities.setCountryCode(rs.getString("CountryCode"));
+                cities.setDistrict(rs.getString("District"));
+                cities.setPopulation(rs.getInt("Population"));
+                pcity_world.add(cities);
+            }
+            return pcity_world;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get Populated Cities in details");
