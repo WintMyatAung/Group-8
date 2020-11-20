@@ -26,7 +26,6 @@ public class AppIntegrationTest
         app.PrintCountryList(null);
     }
 
-    //    Testing about the arraylist contains to be null.
     @Test
     void printCountryTestContainsNull()
     {
@@ -35,7 +34,6 @@ public class AppIntegrationTest
         app.PrintCountryList(countries);
     }
 
-    //    Testing about the arraylist to be empty.
     @Test
     void printCountryTestEmpty()
     {
@@ -43,7 +41,6 @@ public class AppIntegrationTest
         app.PrintCountryList(countries);
     }
 
-    //    Testing about the arraylist.
     @Test
     void printCountryTest()
     {
@@ -58,6 +55,7 @@ public class AppIntegrationTest
         countries.add(countrytest);
         app.PrintCountryList(countries);
     }
+
     //Bhone Thet Aung//
     @Test
     void printCityTestNull()
