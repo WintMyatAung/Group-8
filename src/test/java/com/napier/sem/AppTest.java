@@ -79,4 +79,19 @@ public class AppTest {
         ArrayList<City> cities = new ArrayList<City>();
         app.outputCity(cities);
     }
+
+    // Test city array manual.
+    @Test
+    void printCityTest()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        com.napier.sem.City cttest = new City();
+        cttest.setID(1);
+        cttest.setName("Kabul");
+        cttest.setCountryCode("AFG");
+        cttest.setDistrict("Kabol");
+        cttest.setPopulation(1780000);
+        cities.add(cttest);
+        app.outputCity(cities);
+    }
 }
