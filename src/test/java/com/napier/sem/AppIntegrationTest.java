@@ -58,5 +58,40 @@ public class AppIntegrationTest
         countries.add(countrytest);
         app.PrintCountryList(countries);
     }
+    //Bhone Thet Aung//
+    @Test
+    void printCityTestNull()
+    {
+        app.outputCity(null);
+    }
 
+    @Test
+    void printCityTestContainsNull()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        cities.add(null);
+        app.outputCity(cities);
+    }
+
+    @Test
+    void printCityTestEmpty()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        app.outputCity(cities);
+    }
+
+    // Test city array manual.
+    @Test
+    void printCityTest()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        com.napier.sem.City cttest = new City();
+        cttest.setID(2710);
+        cttest.setName("Rangoon");
+        cttest.setCountryCode("MMR");
+        cttest.setDistrict("Rangoon");
+        cttest.setPopulation(3361700);
+        cities.add(cttest);
+        app.outputCity(cities);
+    }
 }
