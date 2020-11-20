@@ -1,0 +1,39 @@
+@startuml
+left to right direction
+actor User as "User"
+
+rectangle "Function" {
+    usecase UC1a as "display the sorted
+    city population by region"
+
+    usecase UC2a as "display the sorted
+    city population by country name"
+
+    usecase UC3a as "display the sorted
+    city population by district"
+
+    usecase UC4a as "display the top 5
+    city population"
+
+    usecase UC5a as "display the top 5
+    city population by continent"
+
+    usecase UC6a as "display the top 5
+    city population by region"
+
+    usecase UC7a as "display the top 5
+    city population by country name"
+
+    usecase UC8a as "display the top 5
+    city population by district"
+
+    User --> UC1a
+    User --> UC2a
+    User --> UC3a
+    User --> UC4a
+    User --> UC5a
+    User --> UC6a
+    User --> UC7a
+    User --> UC8a
+}
+@enduml
