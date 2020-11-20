@@ -18,12 +18,14 @@ public class AppTest {
     }
 
     // Aung Khant Paing
+//    Testing about the arraylist null.
     @Test
     void printCountryTestNull()
     {
         app.PrintCountryList(null);
     }
 
+//    Testing about the arraylist contains to be null.
     @Test
     void printCountryTestContainsNull()
     {
@@ -32,10 +34,27 @@ public class AppTest {
         app.PrintCountryList(countries);
     }
 
+//    Testing about the arraylist to be empty.
     @Test
     void printCountryTestEmpty()
     {
         ArrayList<Country> countries = new ArrayList<Country>();
+        app.PrintCountryList(countries);
+    }
+
+//    Testing about the arraylist.
+    @Test
+    void printCountryTest()
+    {
+        ArrayList<Country> countries = new ArrayList<Country>();
+        com.napier.sem.Country coutest = new Country();
+        coutest.setcode("ABW");
+        coutest.setname("Aruba");
+        coutest.setCon("North America");
+        coutest.setReg("Caribbean");
+        coutest.setPop(103000);
+        coutest.setcap("Oranjestad");
+        countries.add(coutest);
         app.PrintCountryList(countries);
     }
 
