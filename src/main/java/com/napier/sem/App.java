@@ -12,7 +12,14 @@ public class App
         App a = new App();
 
         // Connect to database
-        a.connect("localhost:33066");
+        if (args.length < 1)
+        {
+            a.connect("localhost:3306");
+        }
+        else
+        {
+            a.connect(args[0]);
+        }
 
         //  Get the largest to smallest population by country
         ArrayList<Country> country = a.getCountryData();
@@ -151,7 +158,7 @@ public class App
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?useSSL=false", "root", "Group8");
+                con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "Group8");
                 System.out.println("Successfully connected");
                 break;
             }
@@ -596,7 +603,7 @@ public class App
             Statement stmt = con.createStatement();
 
             // Create string for SQL statement
-            String query = "select Name,CountryCode,District,Population FROM city where District='Kabol' order by Population desc";
+            String query = "select ID,Name,CountryCode,District,Population FROM city where District='Kabol' order by Population desc";
 
             // Execute SQL statement
             ResultSet rs = stmt.executeQuery(query);
@@ -630,7 +637,7 @@ public class App
             Statement stmt = con.createStatement();
 
             // Create string for SQL statement
-            String query = "select Name,CountryCode,District,Population FROM city where order by Population desc limit 5";
+            String query = "select ID,Name,CountryCode,District,Population FROM city where order by Population desc limit 5";
 
             // Execute SQL statement
             ResultSet rs = stmt.executeQuery(query);
