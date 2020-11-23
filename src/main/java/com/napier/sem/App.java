@@ -3,6 +3,7 @@ package com.napier.sem;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.math.*;
 
 public class App
 {
@@ -22,13 +23,13 @@ public class App
         }
 
         //  Get the largest to smallest population by country
-        ArrayList<Country> country = a.getCountryData();
+        ArrayList<Country> countryWorld = a.getCountryData();
 
         //  Get the largest to smallest population by country continent
-        ArrayList<Country> countrycc = a.getCountryContinentData();
+        ArrayList<Country> countryContinent = a.getCountryContinentData();
 
         //  Get the population of country region in order from largest to smallest
-        ArrayList<Country> region = a.getCountryRegionData();
+        ArrayList<Country> countryRegion = a.getCountryRegionData();
 
         //  Get top 5 populated countries in the world
         ArrayList<Country> pcountry_world = a.getPopulatedCountries_data();
@@ -43,13 +44,13 @@ public class App
 
         // output the country array list
         System.out.println("Table countries sorted by Largest Population to Smallest Population \n");
-        a.PrintCountryList(country);
+        a.PrintCountryList(countryWorld);
 
         System.out.println("Table countries sorted by Largest Population to Smallest Population of a Continent \n");
-        a.PrintCountryList(countrycc);
+        a.PrintCountryList(countryContinent);
 
         System.out.println("Table countries sorted by Largest Population to Smallest Population of a Region \n");
-        a.PrintCountryList(region);
+        a.PrintCountryList(countryRegion);
 
         System.out.println("Top 5 populated countries in the world.......");
         a.PrintCountryList(pcountry_world);
@@ -61,30 +62,17 @@ public class App
         a.PrintCountryList(pcountry_region);
 
 
-
         //  Get the largest to smallest population by city
-        ArrayList<City> city = a.showCity();
+        ArrayList<City> cityWorld = a.showCity();
 
         //  Get the largest to smallest population by city continent
-        ArrayList<City> citycontinent = a.showCityWithContinent();
-
-        //  Get top 5 populated city listed by country name
-        ArrayList<City> cityname = a.showCityWithCountryNameTop();
-
-        //  Get top 5 populated city listed by city District
-        ArrayList<City> citydistrict = a.showCityWithDistrictTop();
-
-        //  Get top 5 populated city listed by country continent
-        ArrayList<City> citycontinenttop = a.showCityWithContinentTop();
-
-        //  Get top 5 populated city listed by country region
-        ArrayList<City> cityregion = a.showCityWithRegionTop();
+        ArrayList<City> cityContinent = a.showCityWithContinent();
 
         //  Get populated city listed by country name
-        ArrayList<City> citycountryname = a.showCityCountryName();
+        ArrayList<City> cityCountryName = a.showCityCountryName();
 
         //  Get populated city listed by country region
-        ArrayList<City> citycountryregion = a.showCityCountryRegion();
+        ArrayList<City> cityCountryRegion = a.showCityCountryRegion();
 
         //  Get the largest to smallest population by city District
         ArrayList<City> cities_district = a.showCityWithDistrict();
@@ -92,37 +80,82 @@ public class App
         //  Get top 5 populated city in the world
         ArrayList<City> pcity_world = a.showCityWithPopulation();
 
+        //  Get top 5 populated city listed by country continent
+        ArrayList<City> cityContinentTop = a.showCityWithContinentTop();
+
+        //  Get top 5 populated city listed by country region
+        ArrayList<City> cityRegionTop = a.showCityWithRegionTop();
+
+        //  Get top 5 populated city listed by country name
+        ArrayList<City> cityNameTop = a.showCityWithCountryNameTop();
+
+        //  Get top 5 populated city listed by city District
+        ArrayList<City> cityDistrictTop = a.showCityWithDistrictTop();
+
 
         // Output the city array list
         System.out.println("Table cities sorted by Largest Population to Smallest Population \n");
-        a.outputCity(city);
+        a.outputCity(cityWorld);
 
         System.out.println("Table cities sorted by Largest Population to Smallest Population of a Continent \n");
-        a.outputCity(citycontinent);
-
-        System.out.println("Top 5 populated city listed by country name \n");
-        a.outputCity(cityname);
-
-        System.out.println("Top 5 populated city listed by city District \n");
-        a.outputCity(citydistrict);
-
-        System.out.println("Top 5 populated city listed by country continent \n");
-        a.outputCity(citycontinenttop);
-
-        System.out.println("Top 5 populated city listed by country region \n");
-        a.outputCity(cityregion);
+        a.outputCity(cityContinent);
 
         System.out.println("populated city listed by country region \n");
-        a.outputCity(citycountryregion);
+        a.outputCity(cityCountryRegion);
 
         System.out.println("populated city listed by country name \n");
-        a.outputCity(citycountryname);
+        a.outputCity(cityCountryName);
 
         System.out.println("Get the largest to smallest population by city District \n");
         a.outputCity(cities_district);
 
         System.out.println("Get top 5 populated city in the world \n");
         a.outputCity(pcity_world);
+
+        System.out.println("Top 5 populated city listed by country continent \n");
+        a.outputCity(cityContinentTop);
+
+        System.out.println("Top 5 populated city listed by country region \n");
+        a.outputCity(cityRegionTop);
+
+        System.out.println("Top 5 populated city listed by country name \n");
+        a.outputCity(cityNameTop);
+
+        System.out.println("Top 5 populated city listed by city District \n");
+        a.outputCity(cityDistrictTop);
+
+
+        //Get the population of people, people living in cities, and people not living in cities in each country.
+        BigInteger[] countryPopulation = a.livingCityInCountry();
+
+        // Output the people living in cities, and people not living in cities
+
+        System.out.println("The name of the country is China.");
+        System.out.println("*********************************\n");
+        a.outputPopulation(countryPopulation);
+
+
+        // Get the total world Population
+        BigInteger[] world = a.getWorldPopulation();
+
+        // Get the total Asia continent Population
+        BigInteger[] continent = a.getContinentPopulation();
+
+        // Get the total Southeast Asia region Population
+        BigInteger[] region = a.getRegionPopulation();
+
+        // Output the Population information
+        System.out.println("The population of the world.");
+        System.out.println("****************************\n");
+        a.outputPopulation(world);
+
+        System.out.println("The population of a continent Asia");
+        System.out.println("**********************************\n");
+        a.outputPopulation(continent);
+
+        System.out.println("The population of a region Southeast Asia.");
+        System.out.println("******************************************\n");
+        a.outputPopulation(region);
 
         // Disconnect from database
         a.disconnect();
@@ -141,7 +174,7 @@ public class App
         try
         {
             // Load Database driver
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         }
         catch (ClassNotFoundException e)
         {
@@ -159,7 +192,7 @@ public class App
                 Thread.sleep(30000);
                 // Connect to database
                 con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "Group8");
-                System.out.println("Successfully connected");
+                System.out.println("Successfully connected\n\n");
                 break;
             }
             catch (SQLException sqle)
@@ -619,7 +652,8 @@ public class App
                 cities_district.add(cities);
             }
             return cities_district;
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get Populated Cities in details");
         }
@@ -637,7 +671,7 @@ public class App
             Statement stmt = con.createStatement();
 
             // Create string for SQL statement
-            String query = "select ID,Name,CountryCode,District,Population FROM city where order by Population desc limit 5";
+            String query = "select ID,Name,CountryCode,District,Population FROM city order by Population desc limit 5";
 
             // Execute SQL statement
             ResultSet rs = stmt.executeQuery(query);
@@ -653,7 +687,8 @@ public class App
                 pcity_world.add(cities);
             }
             return pcity_world;
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get Populated Cities in details");
         }
@@ -810,6 +845,192 @@ public class App
 
 
     /**
+     * Gets all world population.
+     * Aung Khant Paing [40478639]
+     **/
+    public BigInteger[] livingCityInCountry()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect = "SELECT Population, Code FROM country WHERE Name = 'China'";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            ArrayList<String> cityPop = new ArrayList<String>();
+            BigInteger city = new BigInteger("0");
+            BigInteger total = new BigInteger("0");
+            while (rset.next())
+            {
+                String code = rset.getString("Code");
+                int tot = rset.getInt("Population");
+                BigInteger tot1 = BigInteger.valueOf(tot);
+                total = total.add(tot1);
+                String getCityPOP = "SELECT Population FROM city WHERE CountryCode = \'" + code +"\'";
+                cityPop.add(getCityPOP);
+            }
+            for (String i : cityPop) {
+                ResultSet resultPOP = stmt.executeQuery(i);
+                while (resultPOP.next())
+                {
+                    int pop = resultPOP.getInt("Population");
+                    BigInteger pop1 = BigInteger.valueOf(pop);
+                    city = city.add(pop1);
+                }
+            }
+            BigInteger[] country = {total,city};
+            return country;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get people who living in the city by country name.");
+            return null;
+        }
+    }
+
+
+    /**
+     * Gets all world population.
+     * Aung Khant Paing [40478639]
+     **/
+    public BigInteger[] getWorldPopulation()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect = "SELECT Code,Population FROM country";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            ArrayList<String> cityPop = new ArrayList<String>();
+            BigInteger city = new BigInteger("0");
+            BigInteger total = new BigInteger("0");
+            while (rset.next())
+            {
+                String code = rset.getString("Code");
+                int tot = rset.getInt("Population");
+                BigInteger tot1 = BigInteger.valueOf(tot);
+                total = total.add(tot1);
+                String getCityPOP = "SELECT Population FROM city WHERE CountryCode = \'" + code +"\'";
+                cityPop.add(getCityPOP);
+            }
+            for (String i : cityPop) {
+                ResultSet resultPOP = stmt.executeQuery(i);
+                while (resultPOP.next())
+                {
+                    int pop = resultPOP.getInt("Population");
+                    BigInteger pop1 = BigInteger.valueOf(pop);
+                    city = city.add(pop1);
+                }
+            }
+            BigInteger[] world = {total,city};
+            return world;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get world population.");
+            return null;
+        }
+    }
+
+    /**
+     * Gets all Asia Continent population.
+     * Aung Khant Paing [40478639]
+     **/
+    public BigInteger[] getContinentPopulation()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect = "SELECT Population, Code FROM country WHERE Continent = 'Asia'";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            ArrayList<String> cityPop = new ArrayList<String>();
+            BigInteger city = new BigInteger("0");
+            BigInteger total = new BigInteger("0");
+            while (rset.next())
+            {
+                String code = rset.getString("Code");
+                int tot = rset.getInt("Population");
+                BigInteger tot1 = BigInteger.valueOf(tot);
+                total = total.add(tot1);
+                String getCityPOP = "SELECT Population FROM city WHERE CountryCode = \'" + code +"\'";
+                cityPop.add(getCityPOP);
+            }
+            for (String i : cityPop) {
+                ResultSet resultPOP = stmt.executeQuery(i);
+                while (resultPOP.next())
+                {
+                    int pop = resultPOP.getInt("Population");
+                    BigInteger pop1 = BigInteger.valueOf(pop);
+                    city = city.add(pop1);
+                }
+            }
+            BigInteger[] continent = {total,city};
+            return continent;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get continent population.");
+            return null;
+        }
+    }
+
+    /**
+     * Gets all Southeast Asia Region population.
+     * Aung Khant Paing [40478639]
+     **/
+    public BigInteger[] getRegionPopulation()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect = "SELECT Population, Code FROM country WHERE Region = 'Southeast Asia'";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            ArrayList<String> cityPop = new ArrayList<String>();
+            BigInteger city = new BigInteger("0");
+            BigInteger total = new BigInteger("0");
+            while (rset.next())
+            {
+                String code = rset.getString("Code");
+                int tot = rset.getInt("Population");
+                BigInteger tot1 = BigInteger.valueOf(tot);
+                total = total.add(tot1);
+                String getCityPOP = "SELECT Population FROM city WHERE CountryCode = \'" + code +"\'";
+                cityPop.add(getCityPOP);
+            }
+            for (String i : cityPop) {
+                ResultSet resultPOP = stmt.executeQuery(i);
+                while (resultPOP.next())
+                {
+                    int pop = resultPOP.getInt("Population");
+                    BigInteger pop1 = BigInteger.valueOf(pop);
+                    city = city.add(pop1);
+                }
+            }
+            BigInteger[] region = {total,city};
+            return region;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get region population.");
+            return null;
+        }
+    }
+
+
+    /**
      * Print a list of countries.
      * Aung Khant Paing [40478639]
     **/
@@ -876,6 +1097,45 @@ public class App
             System.out.println(ct_string);
         }
         for (int i = 1; i <= 25; i = i +1)
+        {
+            System.out.print("--");
+        }
+        System.out.println("\n\n");
+    }
+
+
+    /**
+     * Prints the population output
+     * Aung Khant Paing [40478643]
+     **/
+    public void outputPopulation(BigInteger[] pop) {
+        // Check the Country data exit or not.
+        if (pop == null)
+        {
+            System.out.println("Not getting the Population data");
+            return;
+        }
+        // Check the value is null or not.
+        if (pop[1] == null || pop[0] == null){
+            System.out.println("Not Getting the Total or People who live in city Population");
+            return;
+        }
+
+        BigInteger total = pop[0];
+        BigInteger city = pop[1];
+
+        // calculate the percentage of people who live in city population.
+        BigDecimal porc = new BigDecimal("100");
+        BigDecimal citypercentage = new BigDecimal(city).multiply(porc).divide(new BigDecimal(total), 2, BigDecimal.ROUND_HALF_EVEN);
+
+        // Calculate the percentage of people who do not live in city population.
+        BigDecimal nocitypercentage = porc.subtract(citypercentage);
+
+        System.out.println("The total population is " + total +".\n");
+        System.out.println("The total population of the people who live in cities is " + citypercentage +"%.\n");
+        System.out.println("The total population of the people who not live in cities is " + nocitypercentage +"%.\n");
+
+        for (int i = 1; i <= 68; i = i +1)
         {
             System.out.print("--");
         }
