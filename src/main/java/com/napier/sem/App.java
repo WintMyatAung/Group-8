@@ -1135,7 +1135,7 @@ public class App
         System.out.println("The total population of the people who live in cities is " + citypercentage +"%.\n");
         System.out.println("The total population of the people who not live in cities is " + nocitypercentage +"%.\n");
 
-        for (int i = 1; i <= 68; i = i +1)
+        for (int i = 1; i <= 34; i = i +1)
         {
             System.out.print("--");
         }
