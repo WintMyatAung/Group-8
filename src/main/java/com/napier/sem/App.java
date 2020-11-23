@@ -132,7 +132,7 @@ public class App
 
         System.out.println("The name of the country is China.");
         System.out.println("*********************************\n");
-        a.outputPopulation(countryPopulation);
+        a.printPopulation(countryPopulation);
 
 
         // Get the total world Population
@@ -147,15 +147,15 @@ public class App
         // Output the Population information
         System.out.println("The population of the world.");
         System.out.println("****************************\n");
-        a.outputPopulation(world);
+        a.printPopulation(world);
 
         System.out.println("The population of a continent Asia");
         System.out.println("**********************************\n");
-        a.outputPopulation(continent);
+        a.printPopulation(continent);
 
         System.out.println("The population of a region Southeast Asia.");
         System.out.println("******************************************\n");
-        a.outputPopulation(region);
+        a.printPopulation(region);
 
         // Disconnect from database
         a.disconnect();
@@ -1042,6 +1042,12 @@ public class App
             System.out.println("Not getting the country data");
             return;
         }
+        // Check the City Data is empty or not.
+        if (country.size() == 0)
+        {
+            System.out.println("Country data is empty.");
+            return;
+        }
         // Print header
         System.out.println(String.format("%-5s %-50s %-15s %-30s %-25s %-20s","Code", "Name", "Continent", "Region", "Population", "Capital"));
         System.out.println(String.format("%-5s %-50s %-15s %-30s %-25s %-20s","----", "----", "---------", "------", "----------", "-------"));
@@ -1049,8 +1055,10 @@ public class App
         for (com.napier.sem.Country cou : country)
         {
             // Check the contains exit or not.
-            if (cou == null)
+            if (cou == null) {
+                System.out.println("Not Getting the Full information of country.");
                 continue;
+            }
             String code = cou.getcode();
             String name = cou.getname();
             String Con = cou.getCon();
@@ -1073,10 +1081,16 @@ public class App
      * Shine Htet Oo [40478643]
     **/
     public void outputCity(ArrayList<City> city) {
-        // Check the Country data exit or not.
+        // Check the City data exit or not.
         if (city == null)
         {
-            System.out.println("Not getting the city data");
+            System.out.println("Not getting the city data.");
+            return;
+        }
+        // Check the City Data is empty or not.
+        if (city.size() == 0)
+        {
+            System.out.println("City data is empty.");
             return;
         }
         // Print header
@@ -1085,8 +1099,10 @@ public class App
         // Loop over all City in the list
         for (City ct : city) {
             // Check the contains exit or not.
-            if (ct == null)
+            if (ct == null) {
+                System.out.println("Not Getting the Full information of city.");
                 continue;
+            }
             String Name = ct.getName();
             String CountryCode = ct.getCountryCode();
             String District = ct.getDistrict();
@@ -1108,37 +1124,45 @@ public class App
      * Prints the population output
      * Aung Khant Paing [40478643]
      **/
-    public void outputPopulation(BigInteger[] pop) {
+    public void printPopulation(BigInteger[] pop) {
         // Check the Country data exit or not.
         if (pop == null)
         {
             System.out.println("Not getting the Population data");
             return;
         }
-        // Check the value is null or not.
-        if (pop[1] == null || pop[0] == null){
-            System.out.println("Not Getting the Total or People who live in city Population");
-            return;
-        }
-
-        BigInteger total = pop[0];
-        BigInteger city = pop[1];
-
-        // calculate the percentage of people who live in city population.
-        BigDecimal porc = new BigDecimal("100");
-        BigDecimal citypercentage = new BigDecimal(city).multiply(porc).divide(new BigDecimal(total), 2, BigDecimal.ROUND_HALF_EVEN);
-
-        // Calculate the percentage of people who do not live in city population.
-        BigDecimal nocitypercentage = porc.subtract(citypercentage);
-
-        System.out.println("The total population is " + total +".\n");
-        System.out.println("The total population of the people who live in cities is " + citypercentage +"%.\n");
-        System.out.println("The total population of the people who not live in cities is " + nocitypercentage +"%.\n");
-
-        for (int i = 1; i <= 34; i = i +1)
+        // Check the value is not null
+        if (pop.length == 0)
         {
-            System.out.print("--");
+            System.out.println("Empty Population Array.");
         }
-        System.out.println("\n\n");
+        else
+        {
+            // Check the value is null or not.
+            if (pop[1] == null || pop[0] == null){
+                System.out.println("Not Getting the Total or People who live in city Population");
+                return;
+            }
+
+            BigInteger total = pop[0];
+            BigInteger city = pop[1];
+
+            // calculate the percentage of people who live in city population.
+            BigDecimal porc = new BigDecimal("100");
+            BigDecimal citypercentage = new BigDecimal(city).multiply(porc).divide(new BigDecimal(total), 2, BigDecimal.ROUND_HALF_EVEN);
+
+            // Calculate the percentage of people who do not live in city population.
+            BigDecimal nocitypercentage = porc.subtract(citypercentage);
+
+            System.out.println("The total population is " + total +".\n");
+            System.out.println("The total population of the people who live in cities is " + citypercentage +"%.\n");
+            System.out.println("The total population of the people who not live in cities is " + nocitypercentage +"%.\n");
+
+            for (int i = 1; i <= 34; i = i +1)
+            {
+                System.out.print("--");
+            }
+            System.out.println("\n\n");
+        }
     }
 }

@@ -2,11 +2,9 @@ package com.napier.sem;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class AppTest {
     static App app;
@@ -93,5 +91,41 @@ public class AppTest {
         cttest.setPopulation(1780000);
         cities.add(cttest);
         app.outputCity(cities);
+    }
+
+    // Aung Khant Paing
+//    Testing about the arraylist null.
+    @Test
+    void printPopulationTestNull()
+    {
+        app.printPopulation(null);
+    }
+
+    //    Testing about the arraylist contains to be null.
+    @Test
+    void printPopulationTestContainsNull()
+    {
+        BigInteger city = null;
+        BigInteger total = new BigInteger("0");
+        BigInteger[] pop= {total,city};
+        app.printPopulation(pop);
+    }
+
+    //    Testing about the arraylist to be empty.
+    @Test
+    void printPopulationTestEmpty()
+    {
+        BigInteger[] pop = {};
+        app.printPopulation(pop);
+    }
+
+    //    Testing about the arraylist.
+    @Test
+    void printPopulationTest()
+    {
+        BigInteger city = new BigInteger("35");
+        BigInteger total = new BigInteger("100");
+        BigInteger[] pop= {total,city};
+        app.printPopulation(pop);
     }
 }
