@@ -150,6 +150,9 @@ public class App
         // Get the total Rio Grande do Sul district Population
         BigInteger district = a.getDistrictPopulation();
 
+        // Get the total Los Angeles city population
+        BigInteger city = a.getCityPopulation();
+
         // Output the Population information
         System.out.println("The population of the world is "+ world +".\n\n");
 
@@ -160,6 +163,8 @@ public class App
         System.out.println("The population of a country (Egypt) is "+ country +".\n\n");
 
         System.out.println("The population of a district (Rio Grande do Sul) is "+ district +".\n\n");
+
+        System.out.println("The population of a city (Los Angeles) is "+ city +".\n\n");
 
         // Disconnect from database
         a.disconnect();
@@ -1051,6 +1056,38 @@ public class App
         {
             System.out.println(e.getMessage());
             System.out.println("Failed to get District population.");
+            return null;
+        }
+    }
+
+    /**
+     * Gets all Los Angeles city population.
+     * Shine Htet Oo [40478643]
+     **/
+    public BigInteger getCityPopulation()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect = "SELECT Population FROM city WHERE Name = 'Los Angeles'";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            BigInteger total = new BigInteger("0");
+            while (rset.next())
+            {
+                int tot = rset.getInt("Population");
+                BigInteger tot1 = BigInteger.valueOf(tot);
+                total = total.add(tot1);
+            }
+            BigInteger city = total;
+            return city;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get City population.");
             return null;
         }
     }
