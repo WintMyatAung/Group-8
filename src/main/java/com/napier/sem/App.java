@@ -144,12 +144,22 @@ public class App
         // Get the total Southeast Asia region Population
         BigInteger region = a.getRegionPopulation();
 
+        // Get the total Egypt Country Population
+        BigInteger country = a.getCountryPopulation();
+
+        // Get the total Rio Grande do Sul district Population
+        BigInteger district = a.getDistrictPopulation();
+
         // Output the Population information
-        System.out.println("The population of the world is "+ world +".");
+        System.out.println("The population of the world is "+ world +".\n\n");
 
-        System.out.println("The population of a continent Asia is "+ continent +".");
+        System.out.println("The population of a continent (Asia) is "+ continent +".\n\n");
 
-        System.out.println("The population of a region Southeast Asia is "+ region +".");
+        System.out.println("The population of a region (Southeast Asia) is "+ region +".\n\n");
+
+        System.out.println("The population of a country (Egypt) is "+ country +".\n\n");
+
+        System.out.println("The population of a district (Rio Grande do Sul) is "+ district +".\n\n");
 
         // Disconnect from database
         a.disconnect();
@@ -981,6 +991,69 @@ public class App
         }
     }
 
+    /**
+     * Gets all Egypt Country population.
+     * Shine Htet Oo [40478643]
+     **/
+    public BigInteger getCountryPopulation()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect = "SELECT Population FROM country WHERE Name = 'Egypt'";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            BigInteger total = new BigInteger("0");
+            while (rset.next())
+            {
+                int tot = rset.getInt("Population");
+                BigInteger tot1 = BigInteger.valueOf(tot);
+                total = total.add(tot1);
+            }
+            BigInteger country = total;
+            return country;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Country population.");
+            return null;
+        }
+    }
+
+    /**
+     * Gets all Rio Grande do Sul district population.
+     * Shine Htet Oo [40478643]
+     **/
+    public BigInteger getDistrictPopulation()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect = "SELECT Population FROM city WHERE District = 'Rio Grande do Sul'";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            BigInteger total = new BigInteger("0");
+            while (rset.next())
+            {
+                int tot = rset.getInt("Population");
+                BigInteger tot1 = BigInteger.valueOf(tot);
+                total = total.add(tot1);
+            }
+            BigInteger district = total;
+            return district;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get District population.");
+            return null;
+        }
+    }
 
     /**
      * Print a list of countries.
