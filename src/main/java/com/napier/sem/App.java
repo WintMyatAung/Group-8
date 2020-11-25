@@ -136,26 +136,20 @@ public class App
 
 
         // Get the total world Population
-        BigInteger[] world = a.getWorldPopulation();
+        BigInteger world = a.getWorldPopulation();
 
         // Get the total Asia continent Population
-        BigInteger[] continent = a.getContinentPopulation();
+        BigInteger continent = a.getContinentPopulation();
 
         // Get the total Southeast Asia region Population
-        BigInteger[] region = a.getRegionPopulation();
+        BigInteger region = a.getRegionPopulation();
 
         // Output the Population information
-        System.out.println("The population of the world.");
-        System.out.println("****************************\n");
-        a.printPopulation(world);
+        System.out.println("The population of the world is "+ world +".");
 
-        System.out.println("The population of a continent Asia");
-        System.out.println("**********************************\n");
-        a.printPopulation(continent);
+        System.out.println("The population of a continent Asia is "+ continent +".");
 
-        System.out.println("The population of a region Southeast Asia.");
-        System.out.println("******************************************\n");
-        a.printPopulation(region);
+        System.out.println("The population of a region Southeast Asia is "+ region +".");
 
         // Disconnect from database
         a.disconnect();
@@ -895,38 +889,24 @@ public class App
      * Gets all world population.
      * Aung Khant Paing [40478639]
      **/
-    public BigInteger[] getWorldPopulation()
+    public BigInteger getWorldPopulation()
     {
         try
         {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
-            String strSelect = "SELECT Code,Population FROM country";
+            String strSelect = "SELECT Population FROM country";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            ArrayList<String> cityPop = new ArrayList<String>();
-            BigInteger city = new BigInteger("0");
             BigInteger total = new BigInteger("0");
             while (rset.next())
             {
-                String code = rset.getString("Code");
                 int tot = rset.getInt("Population");
                 BigInteger tot1 = BigInteger.valueOf(tot);
                 total = total.add(tot1);
-                String getCityPOP = "SELECT Population FROM city WHERE CountryCode = \'" + code +"\'";
-                cityPop.add(getCityPOP);
             }
-            for (String i : cityPop) {
-                ResultSet resultPOP = stmt.executeQuery(i);
-                while (resultPOP.next())
-                {
-                    int pop = resultPOP.getInt("Population");
-                    BigInteger pop1 = BigInteger.valueOf(pop);
-                    city = city.add(pop1);
-                }
-            }
-            BigInteger[] world = {total,city};
+            BigInteger world = total;
             return world;
         }
         catch (Exception e)
@@ -941,38 +921,24 @@ public class App
      * Gets all Asia Continent population.
      * Aung Khant Paing [40478639]
      **/
-    public BigInteger[] getContinentPopulation()
+    public BigInteger getContinentPopulation()
     {
         try
         {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
-            String strSelect = "SELECT Population, Code FROM country WHERE Continent = 'Asia'";
+            String strSelect = "SELECT Population FROM country WHERE Continent = 'Asia'";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            ArrayList<String> cityPop = new ArrayList<String>();
-            BigInteger city = new BigInteger("0");
             BigInteger total = new BigInteger("0");
             while (rset.next())
             {
-                String code = rset.getString("Code");
                 int tot = rset.getInt("Population");
                 BigInteger tot1 = BigInteger.valueOf(tot);
                 total = total.add(tot1);
-                String getCityPOP = "SELECT Population FROM city WHERE CountryCode = \'" + code +"\'";
-                cityPop.add(getCityPOP);
             }
-            for (String i : cityPop) {
-                ResultSet resultPOP = stmt.executeQuery(i);
-                while (resultPOP.next())
-                {
-                    int pop = resultPOP.getInt("Population");
-                    BigInteger pop1 = BigInteger.valueOf(pop);
-                    city = city.add(pop1);
-                }
-            }
-            BigInteger[] continent = {total,city};
+            BigInteger continent = total;
             return continent;
         }
         catch (Exception e)
@@ -987,38 +953,24 @@ public class App
      * Gets all Southeast Asia Region population.
      * Aung Khant Paing [40478639]
      **/
-    public BigInteger[] getRegionPopulation()
+    public BigInteger getRegionPopulation()
     {
         try
         {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
-            String strSelect = "SELECT Population, Code FROM country WHERE Region = 'Southeast Asia'";
+            String strSelect = "SELECT Population FROM country WHERE Region = 'Southeast Asia'";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            ArrayList<String> cityPop = new ArrayList<String>();
-            BigInteger city = new BigInteger("0");
             BigInteger total = new BigInteger("0");
             while (rset.next())
             {
-                String code = rset.getString("Code");
                 int tot = rset.getInt("Population");
                 BigInteger tot1 = BigInteger.valueOf(tot);
                 total = total.add(tot1);
-                String getCityPOP = "SELECT Population FROM city WHERE CountryCode = \'" + code +"\'";
-                cityPop.add(getCityPOP);
             }
-            for (String i : cityPop) {
-                ResultSet resultPOP = stmt.executeQuery(i);
-                while (resultPOP.next())
-                {
-                    int pop = resultPOP.getInt("Population");
-                    BigInteger pop1 = BigInteger.valueOf(pop);
-                    city = city.add(pop1);
-                }
-            }
-            BigInteger[] region = {total,city};
+            BigInteger region = total;
             return region;
         }
         catch (Exception e)
