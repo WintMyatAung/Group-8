@@ -125,10 +125,15 @@ public class App
         // Gets top 5 populated capital cities in a continent
         ArrayList<Capital_City> CapitalCities_continent = a.showPopulatedCapitalCityWithContinent();
 
+        // Gets top 5 populated capital cities in a region
+        ArrayList<Capital_City> CapitalCities_region = a.showPopulatedCapitalCityWithRegion();
+
         // Output the Capital city array list
         System.out.println("Gets top 5 populated capital cities in a continent....... \n");
         a.outputCapitalCity(CapitalCities_continent);
 
+        System.out.println("Gets top 5 populated capital cities in a region....... \n");
+        a.outputCapitalCity(CapitalCities_region);
 
 
         // Get the population of people, people living in cities, and people not living in cities in each country.
@@ -899,6 +904,39 @@ public class App
 
 
     /**
+     * Gets top 5 populated capital cities in a region.......
+     * Wint Myat Aung [40478650]
+    **/
+    public ArrayList<Capital_City> showPopulatedCapitalCityWithRegion() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String query = "SELECT city.Name, country.Name, city.Population FROM city,country WHERE country.Capital = city.ID and country.Region = 'Southern Europe'  ORDER BY city.Population desc limit 5";
+
+            // Execute SQL statement
+            ResultSet rs = stmt.executeQuery(query);
+
+            ArrayList<Capital_City> CapitalCities_region = new ArrayList<Capital_City>();
+            while (rs.next()) {
+                Capital_City CapCities = new Capital_City();
+                CapCities.setcity_Name(rs.getString("city.Name"));
+                CapCities.setcountry_Name(rs.getString("country.Name"));
+                CapCities.setPopulation(rs.getInt("city.Population"));
+                CapitalCities_region.add(CapCities);
+            }
+            return CapitalCities_region;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Populated capital Cities in details");
+        }
+        return null;
+    }
+
+
+    /**
      * Gets the population for each country.
      * Aung Khant Paing [40478639]
      **/
@@ -1302,8 +1340,8 @@ public class App
             return;
         }
         // Print header
-        System.out.println(String.format("%-40s %-20s %-40s %-30s", "City Name", "Country Name", "City Population"));
-        System.out.println(String.format("%-40s %-20s %-40s %-30s", "___________", "______________", "_______________"));
+        System.out.println(String.format("%-40s %-20s %-40s %-30s", "Name", "Country", "Population"));
+        System.out.println(String.format("%-40s %-20s %-40s %-30s", "_______", "__________", "____________"));
         // Loop over all Capital City in the list
         for (Capital_City capCt : CapCities) {
             // Check the contains exit or not.
