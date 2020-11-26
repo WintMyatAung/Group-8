@@ -90,7 +90,6 @@ public class App
         //  Get top 5 populated city listed by city District
         ArrayList<City> cityDistrictTop = a.showCityWithDistrictTop();
 
-
         // Output the city array list
         System.out.println("Table cities sorted by Largest Population to Smallest Population \n");
         a.outputCity(cityWorld);
@@ -123,7 +122,16 @@ public class App
         a.outputCity(cityDistrictTop);
 
 
-        //Get the population of people, people living in cities, and people not living in cities in each country.
+        // Gets top 5 populated capital cities in a continent
+        ArrayList<Capital_City> CapitalCities_continent = a.showPopulatedCapitalCityWithContinent();
+
+        // Output the Capital city array list
+        System.out.println("Gets top 5 populated capital cities in a continent....... \n");
+        a.outputCapitalCity(CapitalCities_continent);
+
+
+
+        // Get the population of people, people living in cities, and people not living in cities in each country.
         ArrayList<Population> countryPopulation = a.livingCityInCountry();
 
 
@@ -858,6 +866,39 @@ public class App
 
 
     /**
+     * Gets top 5 populated capital cities in a continent.......
+     * Wint Myat Aung [40478650]
+     **/
+    public ArrayList<Capital_City> showPopulatedCapitalCityWithContinent() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String query = "SELECT city.Name,country.Name,city.Population FROM city,country WHERE country.Capital = city.ID and country.Continent = 'Europe' ORDER BY city.Population desc limit 5";
+
+            // Execute SQL statement
+            ResultSet rs = stmt.executeQuery(query);
+
+            ArrayList<Capital_City> CapitalCities_continent = new ArrayList<Capital_City>();
+            while (rs.next()) {
+                Capital_City CapCities = new Capital_City();
+                CapCities.setcity_Name(rs.getString("city.Name"));
+                CapCities.setcountry_Name(rs.getString("country.Name"));
+                CapCities.setPopulation(rs.getInt("city.Population"));
+                CapitalCities_continent.add(CapCities);
+            }
+            return CapitalCities_continent;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Populated capital Cities in details");
+        }
+        return null;
+    }
+
+
+    /**
      * Gets the population for each country.
      * Aung Khant Paing [40478639]
      **/
@@ -927,8 +968,9 @@ public class App
         }
     }
 
+
     /**
-     * Gets all world population.
+     * Gets all Population.
      * Aung Khant Paing [40478639]
      **/
     public BigInteger getWorldPopulation()
@@ -1233,6 +1275,49 @@ public class App
                     String.format("%-40s %-20s %-40s %-30s",
                             Name, CountryCode, District, Population);
             System.out.println(ct_string);
+        }
+        for (int i = 1; i <= 25; i = i +1)
+        {
+            System.out.print("--");
+        }
+        System.out.println("\n\n");
+    }
+
+
+    /**
+     * Prints a list of Capital cities
+     * Wint Myat Aung [40478650]
+    **/
+    public void outputCapitalCity(ArrayList<Capital_City> CapCities) {
+        // Check the Capital City data exit or not.
+        if (CapCities == null)
+        {
+            System.out.println("Not getting the Capital city data.");
+            return;
+        }
+        // Check the Capital City Data is empty or not.
+        if (CapCities.size() == 0)
+        {
+            System.out.println("Capital City data is empty.");
+            return;
+        }
+        // Print header
+        System.out.println(String.format("%-40s %-20s %-40s %-30s", "City Name", "Country Name", "City Population"));
+        System.out.println(String.format("%-40s %-20s %-40s %-30s", "___________", "______________", "_______________"));
+        // Loop over all Capital City in the list
+        for (Capital_City capCt : CapCities) {
+            // Check the contains exit or not.
+            if (capCt == null) {
+                System.out.println("Not Getting the Full information of Capital city.");
+                continue;
+            }
+            String city_Name = capCt.getcity_Name();
+            String country_Name = capCt.getcountry_Name();
+            int Population = capCt.getPopulation();
+            String capCt_string =
+                    String.format("%-40s %-20s %-40s %-30s",
+                            city_Name, country_Name, Population);
+            System.out.println(capCt_string);
         }
         for (int i = 1; i <= 25; i = i +1)
         {
