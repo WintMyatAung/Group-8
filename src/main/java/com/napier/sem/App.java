@@ -1,8 +1,7 @@
 package com.napier.sem;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 import java.math.*;
 
 public class App
@@ -92,7 +91,6 @@ public class App
         //  Get top 5 populated city listed by city District
         ArrayList<City> cityDistrictTop = a.showCityWithDistrictTop();
 
-
         // Output the city array list
         System.out.println("Table cities sorted by Largest Population to Smallest Population \n");
         a.outputCity(cityWorld);
@@ -123,7 +121,6 @@ public class App
 
         System.out.println("Top 5 populated city listed by city District \n");
         a.outputCity(cityDistrictTop);
-
 
         //Get the population of people, people living in cities, and people not living in cities in each country.
         BigInteger[] countryPopulation = a.livingCityInCountry();
@@ -165,6 +162,14 @@ public class App
         System.out.println("The population of a district (Rio Grande do Sul) is "+ district +".\n\n");
 
         System.out.println("The population of a city (Los Angeles) is "+ city +".\n\n");
+
+
+        //  Get Languages
+        ArrayList<Languages> getlanguage = a.showlanguages();
+
+        // Show Languages by largest to smallest
+        System.out.println("Show Languages by largest to smallest \n");
+        a.printLanguage(getlanguage);
 
         // Disconnect from database
         a.disconnect();
@@ -815,7 +820,6 @@ public class App
         }
     }
 
-
     /**
      * Gets all the cities with City District Top 5.
      * Aung Khant Paing [40478639]
@@ -1093,6 +1097,39 @@ public class App
     }
 
     /**
+     * Gets Languages.
+     * Shine Htet Oo [40478643]
+     **/
+    public ArrayList<Languages> showlanguages()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect = "SELECT COUNT(CountryCode), Language FROM countrylanguage GROUP BY Language ORDER BY COUNT(CountryCode) DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract City information
+            ArrayList<Languages> getlang = new ArrayList<Languages>();
+            while (rset.next())
+            {
+                Languages lang = new Languages();
+                lang.setCountLang(rset.getInt("COUNT(CountryCode)"));
+                lang.setLanguage(rset.getString("Language"));
+                getlang.add(lang);
+            }
+            return getlang;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Languages");
+            return null;
+        }
+    }
+
+    /**
      * Print a list of countries.
      * Aung Khant Paing [40478639]
     **/
@@ -1227,4 +1264,46 @@ public class App
             System.out.println("\n\n");
         }
     }
+
+    /**
+     * Prints Languages
+     * Shine Htet Oo [40478643]
+     **/
+    public void printLanguage(ArrayList<Languages> languages) {
+        // Check the Language data exit or not.
+        if (languages == null)
+        {
+            System.out.println("Not getting the city data.");
+            return;
+        }
+        // Check the Language Data is empty or not.
+        if (languages.size() == 0)
+        {
+            System.out.println("City data is empty.");
+            return;
+        }
+        // Print header
+        System.out.println(String.format("%-40s %-30s", "Language", "No of Country"));
+        System.out.println(String.format("%-40s %-30s", "________", "_____________"));
+        // Loop over all languages list
+        for (Languages getlang : languages) {
+            // Check the contains exit or not.
+            if (getlang == null) {
+                System.out.println("Not Getting Languages.");
+                continue;
+            }
+            String Language = getlang.getLanguage();
+            Integer CountLanguage = getlang.getCountLang();
+            String ct_string =
+                    String.format("%-40s %-30s",
+                            Language, CountLanguage);
+            System.out.println(ct_string);
+        }
+        for (int i = 1; i <= 25; i = i +1)
+        {
+            System.out.print("--");
+        }
+        System.out.println("\n\n");
+    }
 }
+
