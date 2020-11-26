@@ -3,6 +3,7 @@ package com.napier.sem;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
@@ -92,7 +93,7 @@ public class AppIntegrationTest
     }
 
     // Aung Khant Paing
-//    Testing about the arraylist null.
+    // Testing about the arraylist null.
     @Test
     void printPopulationTestNull()
     {
@@ -103,9 +104,8 @@ public class AppIntegrationTest
     @Test
     void printPopulationTestContainsNull()
     {
-        BigInteger city = null;
-        BigInteger total = new BigInteger("0");
-        BigInteger[] pop= {total,city};
+        ArrayList<Population> pop = new ArrayList<Population>();
+        pop.add(null);
         app.printPopulation(pop);
     }
 
@@ -113,7 +113,7 @@ public class AppIntegrationTest
     @Test
     void printPopulationTestEmpty()
     {
-        BigInteger[] pop = {};
+        ArrayList<Population> pop = new ArrayList<Population>();
         app.printPopulation(pop);
     }
 
@@ -121,9 +121,11 @@ public class AppIntegrationTest
     @Test
     void printPopulationTest()
     {
-        BigInteger city = new BigInteger("45");
-        BigInteger total = new BigInteger("100");
-        BigInteger[] pop= {total,city};
+        ArrayList<Population> pop = new ArrayList<Population>();
+        Population poptest = new Population();
+        poptest.setName("Asia");
+        poptest.setTotal(new BigDecimal("100"));
+        poptest.setCity(new BigDecimal ("35"));
         app.printPopulation(pop);
     }
 }

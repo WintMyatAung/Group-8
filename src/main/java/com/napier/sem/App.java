@@ -40,7 +40,6 @@ public class App
         ArrayList<Country> pcountry_region = a.getPopulatedCountriesRegion_data();
 
 
-
         // output the country array list
         System.out.println("Table countries sorted by Largest Population to Smallest Population \n");
         a.PrintCountryList(countryWorld);
@@ -91,6 +90,7 @@ public class App
         //  Get top 5 populated city listed by city District
         ArrayList<City> cityDistrictTop = a.showCityWithDistrictTop();
 
+
         // Output the city array list
         System.out.println("Table cities sorted by Largest Population to Smallest Population \n");
         a.outputCity(cityWorld);
@@ -122,13 +122,12 @@ public class App
         System.out.println("Top 5 populated city listed by city District \n");
         a.outputCity(cityDistrictTop);
 
+
         //Get the population of people, people living in cities, and people not living in cities in each country.
-        BigInteger[] countryPopulation = a.livingCityInCountry();
+        ArrayList<Population> countryPopulation = a.livingCityInCountry();
+
 
         // Output the people living in cities, and people not living in cities
-
-        System.out.println("The name of the country is China.");
-        System.out.println("*********************************\n");
         a.printPopulation(countryPopulation);
 
 
@@ -149,6 +148,7 @@ public class App
 
         // Get the total Los Angeles city population
         BigInteger city = a.getCityPopulation();
+
 
         // Output the Population information
         System.out.println("The population of the world is "+ world +".\n\n");
@@ -858,51 +858,74 @@ public class App
 
 
     /**
-     * Gets all world population.
+     * Gets the population for each country.
      * Aung Khant Paing [40478639]
      **/
-    public BigInteger[] livingCityInCountry()
+    public ArrayList<Population> livingCityInCountry()
     {
         try
         {
             // Create an SQL statement
             Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect = "SELECT Population, Code FROM country WHERE Name = 'China'";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            ArrayList<String> cityPop = new ArrayList<String>();
-            BigInteger city = new BigInteger("0");
-            BigInteger total = new BigInteger("0");
-            while (rset.next())
+            String getCountryName = "SELECT Name FROM country";
+            ResultSet getName = stmt.executeQuery(getCountryName);
+            ArrayList<Population> population = new ArrayList<Population>();
+            ArrayList<String> getCountryArray = new ArrayList<String>();
+            while (getName.next())
             {
-                String code = rset.getString("Code");
-                int tot = rset.getInt("Population");
-                BigInteger tot1 = BigInteger.valueOf(tot);
-                total = total.add(tot1);
-                String getCityPOP = "SELECT Population FROM city WHERE CountryCode = \'" + code +"\'";
-                cityPop.add(getCityPOP);
+                getCountryArray.add(getName.getString("Name"));
             }
-            for (String i : cityPop) {
-                ResultSet resultPOP = stmt.executeQuery(i);
-                while (resultPOP.next())
+            for (String Name : getCountryArray)
+            {
+                String strSelect = "SELECT Population, Code, Name FROM country WHERE Name = \'" + Name +"\'";
+                ResultSet rset = stmt.executeQuery(strSelect);
+                while (rset.next())
                 {
-                    int pop = resultPOP.getInt("Population");
-                    BigInteger pop1 = BigInteger.valueOf(pop);
-                    city = city.add(pop1);
+                    Population pop = new Population();
+                    pop.setName(rset.getString("Name"));
+                    BigDecimal total = rset.getBigDecimal("Population");
+                    pop.setTotal(total);
+                    String code = rset.getString("Code");
+                    String getCityPOP = "SELECT sum(Population) as cityPop FROM city WHERE CountryCode = \'" + code +"\' Group By CountryCode";
+                    BigDecimal cityPop = GetcityPopulation(getCityPOP);
+                    pop.setCity(cityPop);
+                    population.add(pop);
                 }
             }
-            BigInteger[] country = {total,city};
-            return country;
+            return population;
         }
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get people who living in the city by country name.");
+            System.out.println("Failed to get total Population and people who living in the city by country name.");
             return null;
         }
     }
 
+    /**
+     * Gets the population of people who live in city for each country.
+     * Aung Khant Paing [40478639]
+     **/
+    public BigDecimal GetcityPopulation(String query)
+    {
+        try {
+            BigDecimal city = new BigDecimal("0.00");
+            Statement stmt = con.createStatement();
+            ResultSet resultPOP = stmt.executeQuery(query);
+            while (resultPOP.next())
+            {
+                BigDecimal pop = resultPOP.getBigDecimal("cityPop");
+                city = city.add(pop);
+            }
+            return city;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to total Population of people who living in city or not.");
+            return null;
+        }
+    }
 
     /**
      * Gets all world population.
@@ -1223,45 +1246,65 @@ public class App
      * Prints the population output
      * Aung Khant Paing [40478643]
      **/
-    public void printPopulation(BigInteger[] pop) {
-        // Check the Country data exit or not.
-        if (pop == null)
-        {
-            System.out.println("Not getting the Population data");
-            return;
-        }
-        // Check the value is not null
-        if (pop.length == 0)
-        {
-            System.out.println("Empty Population Array.");
-        }
-        else
-        {
-            // Check the value is null or not.
-            if (pop[1] == null || pop[0] == null){
-                System.out.println("Not Getting the Total or People who live in city Population");
+    public void printPopulation(ArrayList<Population> popopulation) {
+        try {
+            // Check the Country data exit or not.
+            if (popopulation == null)
+            {
+                System.out.println("Not getting the Population data");
                 return;
             }
-
-            BigInteger total = pop[0];
-            BigInteger city = pop[1];
-
-            // calculate the percentage of people who live in city population.
-            BigDecimal porc = new BigDecimal("100");
-            BigDecimal citypercentage = new BigDecimal(city).multiply(porc).divide(new BigDecimal(total), 2, BigDecimal.ROUND_HALF_EVEN);
-
-            // Calculate the percentage of people who do not live in city population.
-            BigDecimal nocitypercentage = porc.subtract(citypercentage);
-
-            System.out.println("The total population is " + total +".\n");
-            System.out.println("The total population of the people who live in cities is " + citypercentage +"%.\n");
-            System.out.println("The total population of the people who not live in cities is " + nocitypercentage +"%.\n");
-
-            for (int i = 1; i <= 34; i = i +1)
+            // Check the value is not null
+            if (popopulation.size() == 0)
             {
-                System.out.print("--");
+                System.out.println("Empty Population ArrayList.");
             }
-            System.out.println("\n\n");
+            else
+            {
+                for (Population pop : popopulation) {
+                    // Check the contains exit or not.
+                    if (pop == null) {
+                        System.out.println("Not Getting the Full information of Population.");
+                        continue;
+                    }
+                    String name = pop.getName();
+                    BigDecimal total = pop.getTotal();
+                    BigDecimal city = pop.getCity();
+                    BigDecimal nocity = total.subtract(city);
+
+                    System.out.println("***" + name +"***");
+                    System.out.println("The total population is " + total +".");
+
+                    // Check the total population is equal to zero or not.
+                    if ( total.compareTo(BigDecimal.ZERO) == 0){
+                        System.out.println("The total population of the people who live in cities is " + city +"%.");
+                        System.out.println("The total population of the people who not live in cities is " + nocity +"%.\n");
+                    }
+
+                    else
+                    {
+                        // calculate the percentage of people who live in city population.
+                        BigDecimal perc = new BigDecimal("100");
+                        BigDecimal citypercentage = city.multiply(perc).divide(total, 2);
+
+                        // Calculate the percentage of people who do not live in city population.
+                        BigDecimal nocitypercentage = perc.subtract(citypercentage);
+
+                        System.out.println("The total population of the people who live in cities is " + citypercentage +"%.");
+                        System.out.println("The total population of the people who not live in cities is " + nocitypercentage +"%.\n");
+                    }
+                }
+                for (int i = 1; i <= 34; i = i +1)
+                {
+                    System.out.print("--");
+                }
+                System.out.println("\n\n");
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to output the living city population");
         }
     }
 

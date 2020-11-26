@@ -3,6 +3,7 @@ package com.napier.sem;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
@@ -45,7 +46,7 @@ public class AppTest {
     void printCountryTest()
     {
         ArrayList<Country> countries = new ArrayList<Country>();
-        com.napier.sem.Country coutest = new Country();
+        Country coutest = new Country();
         coutest.setcode("ABW");
         coutest.setname("Aruba");
         coutest.setCon("North America");
@@ -83,7 +84,7 @@ public class AppTest {
     void printCityTest()
     {
         ArrayList<City> cities = new ArrayList<City>();
-        com.napier.sem.City cttest = new City();
+        City cttest = new City();
         cttest.setID(1);
         cttest.setName("Kabul");
         cttest.setCountryCode("AFG");
@@ -94,7 +95,7 @@ public class AppTest {
     }
 
     // Aung Khant Paing
-//    Testing about the arraylist null.
+    // Testing about the arraylist null.
     @Test
     void printPopulationTestNull()
     {
@@ -105,9 +106,8 @@ public class AppTest {
     @Test
     void printPopulationTestContainsNull()
     {
-        BigInteger city = null;
-        BigInteger total = new BigInteger("0");
-        BigInteger[] pop= {total,city};
+        ArrayList<Population> pop = new ArrayList<Population>();
+        pop.add(null);
         app.printPopulation(pop);
     }
 
@@ -115,7 +115,7 @@ public class AppTest {
     @Test
     void printPopulationTestEmpty()
     {
-        BigInteger[] pop = {};
+        ArrayList<Population> pop = new ArrayList<Population>();
         app.printPopulation(pop);
     }
 
@@ -123,9 +123,11 @@ public class AppTest {
     @Test
     void printPopulationTest()
     {
-        BigInteger city = new BigInteger("35");
-        BigInteger total = new BigInteger("100");
-        BigInteger[] pop= {total,city};
+        ArrayList<Population> pop = new ArrayList<Population>();
+        Population poptest = new Population();
+        poptest.setName("Asia");
+        poptest.setTotal(new BigDecimal("100"));
+        poptest.setCity(new BigDecimal ("35"));
         app.printPopulation(pop);
     }
 }
