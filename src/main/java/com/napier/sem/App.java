@@ -90,7 +90,6 @@ public class App
         //  Get top 5 populated city listed by city District
         ArrayList<City> cityDistrictTop = a.showCityWithDistrictTop();
 
-
         // Output the city array list
         System.out.println("Table cities sorted by Largest Population to Smallest Population \n");
         a.outputCity(cityWorld);
@@ -121,7 +120,6 @@ public class App
 
         System.out.println("Top 5 populated city listed by city District \n");
         a.outputCity(cityDistrictTop);
-
 
         //Get the population of people, people living in cities, and people not living in cities in each country.
         ArrayList<Population> countryPopulation = a.livingCityInCountry();
@@ -1306,6 +1304,47 @@ public class App
             System.out.println(e.getMessage());
             System.out.println("Failed to output the living city population");
         }
+    }
+
+    /**
+     * Prints Languages
+     * Shine Htet Oo [40478643]
+     **/
+    public void printLanguage(ArrayList<Languages> languages) {
+        // Check the Language data exit or not.
+        if (languages == null)
+        {
+            System.out.println("Not getting the city data.");
+            return;
+        }
+        // Check the Language Data is empty or not.
+        if (languages.size() == 0)
+        {
+            System.out.println("City data is empty.");
+            return;
+        }
+        // Print header
+        System.out.println(String.format("%-40s %-30s", "Language", "No of Country"));
+        System.out.println(String.format("%-40s %-30s", "________", "_____________"));
+        // Loop over all languages list
+        for (Languages getlang : languages) {
+            // Check the contains exit or not.
+            if (getlang == null) {
+                System.out.println("Not Getting Languages.");
+                continue;
+            }
+            String Language = getlang.getLanguage();
+            Integer CountLanguage = getlang.getCountLang();
+            String ct_string =
+                    String.format("%-40s %-30s",
+                            Language, CountLanguage);
+            System.out.println(ct_string);
+        }
+        for (int i = 1; i <= 25; i = i +1)
+        {
+            System.out.print("--");
+        }
+        System.out.println("\n\n");
     }
 
     /**
