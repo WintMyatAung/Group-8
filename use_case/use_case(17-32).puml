@@ -1,0 +1,65 @@
+@startuml
+left to right direction
+actor User as "User"
+
+rectangle "Function" {
+    usecase UC1a as "display the sorted
+    Capital city population."
+
+    usecase UC2a as "display the sorted
+    Capital city population by Continent."
+
+    usecase UC3a as "display the sorted
+    Capital city population by Region."
+
+    usecase UC4a as "display the top 5
+    Capital city population."
+
+    usecase UC5a as "display the top 5
+    Capital city population by continent."
+
+    usecase UC6a as "display the top 5
+    Capital city population by region."
+
+    usecase UC7a as "display the population of people, people living in cities,
+    and people not living in cities in each continent."
+
+    usecase UC8a as "display the population of people, people living in cities,
+    and people not living in cities in each region."
+
+    usecase UC9a as "display the population of people, people living in cities,
+    and people not living in cities in each country."
+
+    usecase UC10a as "display the population of the world."
+
+    usecase UC11a as "display the population of a continent."
+
+    usecase UC12a as "display the population of a region."
+
+    usecase UC13a as "display the population of a country."
+
+    usecase UC14a as "display the population of a district."
+
+    usecase UC15a as "display the population of a city."
+
+    usecase UC16a as "display the number of people who speak the languages."
+
+
+    User --> UC1a
+    User --> UC2a
+    User --> UC3a
+    User --> UC4a
+    User --> UC5a
+    User --> UC6a
+    User --> UC7a
+    User --> UC8a
+    User --> UC9a
+    User --> UC10a
+    User --> UC11a
+    User --> UC12a
+    User --> UC13a
+    User --> UC14a
+    User --> UC15a
+    User --> UC16a
+}
+@enduml
