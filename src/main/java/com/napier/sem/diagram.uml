@@ -4,13 +4,18 @@
   <OriginalElement />
   <nodes>
     <node x="0.0" y="0.0">com.napier.sem.App</node>
-    <node x="372.0" y="0.0">com.napier.sem.Country</node>
-    <node x="0.0" y="563.0">com.napier.sem.City</node>
+    <node x="652.0" y="0.0">com.napier.sem.Capital_City</node>
+    <node x="173.0" y="915.0">com.napier.sem.Languages</node>
+    <node x="448.0" y="0.0">com.napier.sem.Country</node>
+    <node x="904.0" y="0.0">com.napier.sem.City</node>
+    <node x="0.0" y="915.0">com.napier.sem.Population</node>
   </nodes>
   <notes />
   <edges />
-  <settings layout="Hierarchic Group" zoom="1.0" x="256.0" y="-43.5" />
-  <SelectedNodes />
+  <settings layout="Hierarchic Group" zoom="1.0" x="256.0" y="257.5" />
+  <SelectedNodes>
+    <node>com.napier.sem.App</node>
+  </SelectedNodes>
   <Categories>
     <Category>Fields</Category>
     <Category>Constructors</Category>
