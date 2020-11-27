@@ -9,7 +9,6 @@ public class Capital_City {
         this.city_Name = attribute;
     }
 
-
     private String country_Name;
     public String getcountry_Name(){
         return country_Name;
@@ -17,7 +16,6 @@ public class Capital_City {
     public void setcountry_Name(String attribute){
         this.country_Name = attribute;
     }
-
 
     public int Population;
     public int getPopulation(){
