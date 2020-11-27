@@ -3,7 +3,6 @@ package com.napier.sem;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
@@ -97,37 +96,38 @@ public class AppTest {
     // Aung Khant Paing
     // Testing about the arraylist null.
     @Test
-    void printPopulationTestNull()
+    void printCapitalCityTestNull()
     {
-        app.printPopulation(null);
+        app.outputCapitalCity(null);
     }
 
     //    Testing about the arraylist contains to be null.
     @Test
-    void printPopulationTestContainsNull()
+    void printCapitalCityTestContainsNull()
     {
-        ArrayList<Population> pop = new ArrayList<Population>();
-        pop.add(null);
-        app.printPopulation(pop);
+        ArrayList<Capital_City> cap = new ArrayList<Capital_City>();
+        cap.add(null);
+        app.outputCapitalCity(cap);
     }
 
     //    Testing about the arraylist to be empty.
     @Test
-    void printPopulationTestEmpty()
+    void printCapitalCityTestEmpty()
     {
-        ArrayList<Population> pop = new ArrayList<Population>();
-        app.printPopulation(pop);
+        ArrayList<Capital_City> cap = new ArrayList<Capital_City>();
+        app.outputCapitalCity(cap);
     }
 
     //    Testing about the arraylist.
     @Test
-    void printPopulationTest()
+    void printCapitalCityTest()
     {
-        ArrayList<Population> pop = new ArrayList<Population>();
-        Population poptest = new Population();
-        poptest.setName("Asia");
-        poptest.setTotal(new BigInteger("100"));
-        poptest.setCity(new BigInteger ("35"));
-        app.printPopulation(pop);
+        ArrayList<Capital_City> cap = new ArrayList<Capital_City>();
+        Capital_City captest = new Capital_City();
+        captest.setcity_Name("New Delhi");
+        captest.setcountry_Name("India");
+        captest.setPopulation(301297);
+        cap.add(captest);
+        app.outputCapitalCity(cap);
     }
 }

@@ -3,18 +3,49 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="0.0" y="0.0">com.napier.sem.App</node>
-    <node x="652.0" y="0.0">com.napier.sem.Capital_City</node>
-    <node x="173.0" y="915.0">com.napier.sem.Languages</node>
-    <node x="448.0" y="0.0">com.napier.sem.Country</node>
-    <node x="904.0" y="0.0">com.napier.sem.City</node>
-    <node x="0.0" y="915.0">com.napier.sem.Population</node>
+    <node x="166.00000000000003" y="368.0">com.napier.sem.App</node>
+    <node x="467.0" y="55.0">com.napier.sem.Capital_City</node>
+    <node x="-10.0" y="117.0">com.napier.sem.Languages</node>
+    <node x="288.0" y="0.0">com.napier.sem.Country</node>
+    <node x="694.0" y="78.0">com.napier.sem.City</node>
+    <node x="140.0" y="100.0">com.napier.sem.Population</node>
   </nodes>
   <notes />
-  <edges />
-  <settings layout="Hierarchic Group" zoom="1.0" x="256.0" y="257.5" />
+  <edges>
+    <edge source="com.napier.sem.App" target="com.napier.sem.Population">
+      <point x="-100.75000000000006" y="-479.0" />
+      <point x="266.75" y="328.0" />
+      <point x="172.0" y="328.0" />
+      <point x="-32.0" y="49.0" />
+    </edge>
+    <edge source="com.napier.sem.App" target="com.napier.sem.Country">
+      <point x="-20.150000000000034" y="-479.0" />
+      <point x="347.35" y="348.0" />
+      <point x="327.75" y="348.0" />
+      <point x="-39.75" y="149.0" />
+    </edge>
+    <edge source="com.napier.sem.App" target="com.napier.sem.Capital_City">
+      <point x="60.450000000000045" y="-479.0" />
+      <point x="427.95000000000005" y="318.0" />
+      <point x="518.75" y="318.0" />
+      <point x="-51.75" y="94.0" />
+    </edge>
+    <edge source="com.napier.sem.App" target="com.napier.sem.Languages">
+      <point x="-181.35000000000008" y="-479.0" />
+      <point x="186.14999999999995" y="348.0" />
+      <point x="30.0" y="348.0" />
+      <point x="-30.0" y="38.0" />
+    </edge>
+    <edge source="com.napier.sem.App" target="com.napier.sem.City">
+      <point x="141.04999999999995" y="-479.0" />
+      <point x="508.54999999999995" y="338.0" />
+      <point x="728.0" y="338.0" />
+      <point x="-34.0" y="71.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="328.0" y="341.5" />
   <SelectedNodes>
-    <node>com.napier.sem.App</node>
+    <node>com.napier.sem.Languages</node>
   </SelectedNodes>
   <Categories>
     <Category>Fields</Category>

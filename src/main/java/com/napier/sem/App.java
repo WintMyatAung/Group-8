@@ -160,26 +160,6 @@ public class App
         a.outputCapitalCity(capitalCities_World);
 
 
-        // Get the population of people, people living in cities, and people not living in cities in each country.
-        ArrayList<Population> countryPopulation = a.livingCityInCountry();
-
-        // Get the population of people, people living in cities, and people not living in cities in each continent.
-        ArrayList<Population> continentPop = a.livingCityInContinent();
-
-        // Get the population of people, people living in cities, and people not living in cities in each region.
-        ArrayList<Population> regionPop = a.livingCityInRegion();
-
-        // Output the people living in cities, and people not living in cities
-        System.out.println("Gets the population for people living in cities, and people not living in cities in each Country. \n");
-        a.printPopulation(countryPopulation);
-
-        System.out.println("Gets the population for people living in cities, and people not living in cities in each Continent. \n");
-        a.printPopulation(continentPop);
-
-        System.out.println("Gets the population for people living in cities, and people not living in cities in each Region. \n");
-        a.printPopulation(regionPop);
-
-
         // Get the total world Population
         BigInteger world = a.getWorldPopulation();
 
@@ -1103,201 +1083,6 @@ public class App
 
 
     /**
-     * Gets the population for each Continent.
-     * Wint Myat Aung [40478650]
-    **/
-    public ArrayList<Population> livingCityInContinent() {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            String getContinent = "SELECT count(Name), Continent FROM country GROUP BY Continent";
-            ResultSet getcont = stmt.executeQuery(getContinent);
-
-            ArrayList<Population> population = new ArrayList<Population>();
-            ArrayList<String> getCountryArray = new ArrayList<String>();
-            ArrayList<String> getContinentArray = new ArrayList<String>();
-            while (getcont.next())
-            {
-                getContinentArray.add(getcont.getString("Continent"));
-            }
-            for (String cont : getContinentArray)
-            {
-                Population pop = new Population();
-                BigInteger total = new BigInteger("0");
-                BigInteger cityPop = new BigInteger("0");
-                pop.setName(cont);
-                String getCountry = "SELECT Name FROM country WHERE Continent = \'" + cont +"\'";
-                ResultSet getName = stmt.executeQuery(getCountry);
-                while (getName.next())
-                {
-                    getCountryArray.add(getName.getString("Name"));
-                }
-                for (String Name : getCountryArray)
-                {
-                    String strSelect = "SELECT Population, Code FROM country WHERE Name = \'" + Name +"\'";
-                    ResultSet rset = stmt.executeQuery(strSelect);
-                    while (rset.next())
-                    {
-                        int total1 = rset.getInt("Population");
-                        BigInteger total2 = BigInteger.valueOf(total1);
-                        total = total.add(total2);
-                        String code = rset.getString("Code");
-                        String getCityPOP = "SELECT sum(Population) as cityPop FROM city WHERE CountryCode = \'" + code +"\' Group By CountryCode";
-                        BigInteger cityPop1 = GetcityPopulation(getCityPOP);
-                        cityPop = cityPop.add(cityPop1);
-                    }
-                }
-                pop.setTotal(total);
-                pop.setCity(cityPop);
-                population.add(pop);
-            }
-            return population;
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get total Population and people who living in the city by Continent.");
-            return null;
-        }
-    }
-
-
-    /**
-     * Gets the population for each Region.
-     * Wint Myat Aung [40478650]
-    **/
-    public ArrayList<Population> livingCityInRegion()
-    {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            String getRegion = "SELECT count(Name), Region FROM country GROUP BY Region";
-            ResultSet getReg = stmt.executeQuery(getRegion);
-            ArrayList<Population> population = new ArrayList<Population>();
-            ArrayList<String> getCountryArray = new ArrayList<String>();
-            ArrayList<String> getRegionArray = new ArrayList<String>();
-            while (getReg.next())
-            {
-                getRegionArray.add(getReg.getString("Region"));
-            }
-            for (String reg : getRegionArray)
-            {
-                Population pop = new Population();
-                BigInteger total = new BigInteger("0");
-                BigInteger cityPop = new BigInteger("0");
-                pop.setName(reg);
-                String getCountry = "SELECT Name FROM country WHERE Region = \'" + reg +"\'";
-                ResultSet getName = stmt.executeQuery(getCountry);
-                while (getName.next())
-                {
-                    getCountryArray.add(getName.getString("Name"));
-                }
-                for (String Name : getCountryArray)
-                {
-                    String strSelect = "SELECT Population, Code, Name FROM country WHERE Name = \'" + Name +"\'";
-                    ResultSet rset = stmt.executeQuery(strSelect);
-                    while (rset.next())
-                    {
-                        int total1 = rset.getInt("Population");
-                        BigInteger total2 = BigInteger.valueOf(total1);
-                        total = total.add(total2);
-                        String code = rset.getString("Code");
-                        String getCityPOP = "SELECT sum(Population) as cityPop FROM city WHERE CountryCode = \'" + code +"\' Group By CountryCode";
-                        BigInteger cityPop1 = GetcityPopulation(getCityPOP);
-                        cityPop = cityPop.add(cityPop1);
-                    }
-                }
-                pop.setTotal(total);
-                pop.setCity(cityPop);
-                population.add(pop);
-            }
-            return population;
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get total Population and people who living in the city by Region.");
-            return null;
-        }
-    }
-
-
-    /**
-     * Gets the population for each country.
-     * Aung Khant Paing [40478639]
-     **/
-    public ArrayList<Population> livingCityInCountry()
-    {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            String getCountryName = "SELECT Name FROM country";
-            ResultSet getName = stmt.executeQuery(getCountryName);
-            ArrayList<Population> population = new ArrayList<Population>();
-            ArrayList<String> getCountryArray = new ArrayList<String>();
-            while (getName.next())
-            {
-                getCountryArray.add(getName.getString("Name"));
-            }
-            for (String Name : getCountryArray)
-            {
-                String strSelect = "SELECT Population, Code, Name FROM country WHERE Name = \'" + Name +"\'";
-                ResultSet rset = stmt.executeQuery(strSelect);
-                while (rset.next())
-                {
-                    Population pop = new Population();
-                    pop.setName(rset.getString("Name"));
-                    int total1 = rset.getInt("Population");
-                    BigInteger total = BigInteger.valueOf(total1);
-                    pop.setTotal(total);
-                    String code = rset.getString("Code");
-                    String getCityPOP = "SELECT sum(Population) as cityPop FROM city WHERE CountryCode = \'" + code +"\' Group By CountryCode";
-                    BigInteger cityPop = GetcityPopulation(getCityPOP);
-                    pop.setCity(cityPop);
-                    population.add(pop);
-                }
-            }
-            return population;
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get total Population and people who living in the city by country name.");
-            return null;
-        }
-    }
-
-    /**
-     * Gets the population of people who live in city for each country.
-     * Aung Khant Paing [40478639]
-     **/
-    public BigInteger GetcityPopulation(String query)
-    {
-        try {
-            BigInteger city = new BigInteger("0");
-            Statement stmt = con.createStatement();
-            ResultSet resultPOP = stmt.executeQuery(query);
-            while (resultPOP.next())
-            {
-                int pop1 = resultPOP.getInt("cityPop");
-                BigInteger pop = BigInteger.valueOf(pop1);
-                city = city.add(pop);
-            }
-            return city;
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to total Population of people who living in city or not.");
-            return null;
-        }
-    }
-
-
-    /**
      * Gets all Population.
      * Aung Khant Paing [40478639]
      **/
@@ -1328,6 +1113,7 @@ public class App
             return null;
         }
     }
+
 
     /**
      * Gets all Asia Continent population.
@@ -1360,6 +1146,7 @@ public class App
             return null;
         }
     }
+
 
     /**
      * Gets all Southeast Asia Region population.
@@ -1654,72 +1441,6 @@ public class App
         System.out.println("\n\n");
     }
 
-
-    /**
-     * Prints the population output
-     * Aung Khant Paing [40478643]
-     **/
-    public void printPopulation(ArrayList<Population> popopulation) {
-        try {
-            // Check the Country data exit or not.
-            if (popopulation == null)
-            {
-                System.out.println("Not getting the Population data");
-                return;
-            }
-            // Check the value is not null
-            if (popopulation.size() == 0)
-            {
-                System.out.println("Empty Population ArrayList.");
-            }
-            else
-            {
-                for (Population pop : popopulation) {
-                    // Check the contains exit or not.
-                    if (pop == null) {
-                        System.out.println("Not Getting the Full information of Population.");
-                        continue;
-                    }
-                    String name = pop.getName();
-                    BigInteger total = pop.getTotal();
-                    BigInteger city = pop.getCity();
-                    BigInteger nocity = total.subtract(city);
-
-                    System.out.println("***" + name +"***");
-                    System.out.println("The total population is " + total +".");
-
-                    // Check the total population is equal to zero or not.
-                    if ( total.compareTo(BigInteger.ZERO) == 0){
-                        System.out.println("The total population of the people who live in cities is " + city +"%.");
-                        System.out.println("The total population of the people who not live in cities is " + nocity +"%.\n");
-                    }
-
-                    else
-                    {
-                        // calculate the percentage of people who live in city population.
-                        BigDecimal perc = new BigDecimal("100");
-                        BigDecimal citypercentage = new BigDecimal (city).multiply(perc).divide( new BigDecimal (total), 2);
-
-                        // Calculate the percentage of people who do not live in city population.
-                        BigDecimal nocitypercentage = perc.subtract(citypercentage);
-
-                        System.out.println("The total population of the people who live in cities is " + citypercentage +"%.");
-                        System.out.println("The total population of the people who not live in cities is " + nocitypercentage +"%.\n");
-                    }
-                }
-                for (int i = 1; i <= 34; i = i +1)
-                {
-                    System.out.print("--");
-                }
-                System.out.println("\n\n");
-            }
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to output the living city population");
-        }
-    }
 
     /**
      * Prints Languages
