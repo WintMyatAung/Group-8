@@ -962,11 +962,12 @@ public class App
                 {
                     Population pop = new Population();
                     pop.setName(rset.getString("Name"));
-                    BigDecimal total = rset.getBigDecimal("Population");
+                    int total1 = rset.getInt("Population");
+                    BigInteger total = BigInteger.valueOf(total1);
                     pop.setTotal(total);
                     String code = rset.getString("Code");
                     String getCityPOP = "SELECT sum(Population) as cityPop FROM city WHERE CountryCode = \'" + code +"\' Group By CountryCode";
-                    BigDecimal cityPop = GetcityPopulation(getCityPOP);
+                    BigInteger cityPop = GetcityPopulation(getCityPOP);
                     pop.setCity(cityPop);
                     population.add(pop);
                 }
@@ -985,15 +986,16 @@ public class App
      * Gets the population of people who live in city for each country.
      * Aung Khant Paing [40478639]
      **/
-    public BigDecimal GetcityPopulation(String query)
+    public BigInteger GetcityPopulation(String query)
     {
         try {
-            BigDecimal city = new BigDecimal("0.00");
+            BigInteger city = new BigInteger("0");
             Statement stmt = con.createStatement();
             ResultSet resultPOP = stmt.executeQuery(query);
             while (resultPOP.next())
             {
-                BigDecimal pop = resultPOP.getBigDecimal("cityPop");
+                int pop1 = resultPOP.getInt("cityPop");
+                BigInteger pop = BigInteger.valueOf(pop1);
                 city = city.add(pop);
             }
             return city;
@@ -1340,8 +1342,8 @@ public class App
             return;
         }
         // Print header
-        System.out.println(String.format("%-40s %-20s %-40s %-30s", "Name", "Country", "Population"));
-        System.out.println(String.format("%-40s %-20s %-40s %-30s", "_______", "__________", "____________"));
+        System.out.println(String.format("%-40s %-20s %-40s", "Name", "Country", "Population"));
+        System.out.println(String.format("%-40s %-20s %-40s", "_______", "__________", "____________"));
         // Loop over all Capital City in the list
         for (Capital_City capCt : CapCities) {
             // Check the contains exit or not.
@@ -1353,7 +1355,7 @@ public class App
             String country_Name = capCt.getcountry_Name();
             int Population = capCt.getPopulation();
             String capCt_string =
-                    String.format("%-40s %-20s %-40s %-30s",
+                    String.format("%-40s %-20s %-40s",
                             city_Name, country_Name, Population);
             System.out.println(capCt_string);
         }
@@ -1391,15 +1393,15 @@ public class App
                         continue;
                     }
                     String name = pop.getName();
-                    BigDecimal total = pop.getTotal();
-                    BigDecimal city = pop.getCity();
-                    BigDecimal nocity = total.subtract(city);
+                    BigInteger total = pop.getTotal();
+                    BigInteger city = pop.getCity();
+                    BigInteger nocity = total.subtract(city);
 
                     System.out.println("***" + name +"***");
                     System.out.println("The total population is " + total +".");
 
                     // Check the total population is equal to zero or not.
-                    if ( total.compareTo(BigDecimal.ZERO) == 0){
+                    if ( total.compareTo(BigInteger.ZERO) == 0){
                         System.out.println("The total population of the people who live in cities is " + city +"%.");
                         System.out.println("The total population of the people who not live in cities is " + nocity +"%.\n");
                     }
@@ -1408,7 +1410,7 @@ public class App
                     {
                         // calculate the percentage of people who live in city population.
                         BigDecimal perc = new BigDecimal("100");
-                        BigDecimal citypercentage = city.multiply(perc).divide(total, 2);
+                        BigDecimal citypercentage = new BigDecimal (city).multiply(perc).divide( new BigDecimal (total), 2);
 
                         // Calculate the percentage of people who do not live in city population.
                         BigDecimal nocitypercentage = perc.subtract(citypercentage);

@@ -1,6 +1,7 @@
 package com.napier.sem;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 public class Population {
 
@@ -12,19 +13,19 @@ public class Population {
         this.name = attribute;
     }
 
-    private BigDecimal total;
-    public BigDecimal getTotal(){
+    private BigInteger total;
+    public BigInteger getTotal(){
         return total;
     }
-    public void setTotal(BigDecimal attribute){
+    public void setTotal(BigInteger attribute){
         this.total = attribute;
     }
 
-    private BigDecimal city;
-    public BigDecimal getCity(){
+    private BigInteger city;
+    public BigInteger getCity(){
         return city;
     }
-    public void setCity(BigDecimal attribute){
+    public void setCity(BigInteger attribute){
         this.city = attribute;
     }
 }

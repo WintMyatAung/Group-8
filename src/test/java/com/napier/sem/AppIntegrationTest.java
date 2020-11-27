@@ -124,8 +124,8 @@ public class AppIntegrationTest
         ArrayList<Population> pop = new ArrayList<Population>();
         Population poptest = new Population();
         poptest.setName("Asia");
-        poptest.setTotal(new BigDecimal("100"));
-        poptest.setCity(new BigDecimal ("35"));
+        poptest.setTotal(new BigInteger("100"));
+        poptest.setCity(new BigInteger ("35"));
         app.printPopulation(pop);
     }
 }
