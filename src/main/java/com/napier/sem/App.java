@@ -125,6 +125,18 @@ public class App
         // Gets top 5 populated capital cities in a continent
         ArrayList<Capital_City> CapitalCities_continent = a.showPopulatedCapitalCityWithContinent();
 
+        // Gets populated capital cities in a World
+        ArrayList<Capital_City> capitalCitiesWorld = a.showPopulatedCapitalCity();
+
+        // Gets populated capital cities in a Continent
+        ArrayList<Capital_City> capitalCitiesContinent = a.showPopulatedCapitalCityContinent();
+
+        // Gets populated capital cities in a Region
+        ArrayList<Capital_City> capitalCitiesRegion = a.showPopulatedCapitalCityRegion();
+
+        // Gets top 5 populated capital cities in a World
+        ArrayList<Capital_City> capitalCities_World = a.showPopulatedCapitalCityWorld();
+
         // Gets top 5 populated capital cities in a region
         ArrayList<Capital_City> CapitalCities_region = a.showPopulatedCapitalCityWithRegion();
 
@@ -134,6 +146,18 @@ public class App
 
         System.out.println("Gets top 5 populated capital cities in a region....... \n");
         a.outputCapitalCity(CapitalCities_region);
+
+        System.out.println("Gets populated capital cities in a world....... \n");
+        a.outputCapitalCity(capitalCitiesWorld);
+
+        System.out.println("Gets populated capital cities in a continent....... \n");
+        a.outputCapitalCity(capitalCitiesContinent);
+
+        System.out.println("Gets populated capital cities in a region....... \n");
+        a.outputCapitalCity(capitalCitiesRegion);
+
+        System.out.println("Gets top 5 populated capital cities in a World....... \n");
+        a.outputCapitalCity(capitalCities_World);
 
 
         // Get the population of people, people living in cities, and people not living in cities in each country.
@@ -881,6 +905,136 @@ public class App
         }
     }
 
+    /**
+     * Gets populated capital cities in a world
+     *
+     **/
+    public ArrayList<Capital_City> showPopulatedCapitalCity() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String query = "SELECT city.Name,country.Name,city.Population FROM city,country WHERE country.Capital = city.ID ORDER BY city.Population desc";
+
+            // Execute SQL statement
+            ResultSet rs = stmt.executeQuery(query);
+
+            ArrayList<Capital_City> CapitalCities_continent = new ArrayList<Capital_City>();
+            while (rs.next()) {
+                Capital_City CapCities = new Capital_City();
+                CapCities.setcity_Name(rs.getString("city.Name"));
+                CapCities.setcountry_Name(rs.getString("country.Name"));
+                CapCities.setPopulation(rs.getInt("city.Population"));
+                CapitalCities_continent.add(CapCities);
+            }
+            return CapitalCities_continent;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Populated capital Cities in details");
+        }
+        return null;
+    }
+
+
+    /**
+     * Gets populated capital cities in a continent
+     *
+     **/
+    public ArrayList<Capital_City> showPopulatedCapitalCityContinent() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String query = "SELECT city.Name,country.Name,city.Population FROM city,country WHERE country.Capital = city.ID and country.Continent = 'Asia' ORDER BY city.Population";
+
+            // Execute SQL statement
+            ResultSet rs = stmt.executeQuery(query);
+
+            ArrayList<Capital_City> CapitalCities_continent = new ArrayList<Capital_City>();
+            while (rs.next()) {
+                Capital_City CapCities = new Capital_City();
+                CapCities.setcity_Name(rs.getString("city.Name"));
+                CapCities.setcountry_Name(rs.getString("country.Name"));
+                CapCities.setPopulation(rs.getInt("city.Population"));
+                CapitalCities_continent.add(CapCities);
+            }
+            return CapitalCities_continent;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Populated capital Cities in details");
+        }
+        return null;
+    }
+
+
+    /**
+     * Gets populated capital cities in a Region.......
+     *
+     **/
+    public ArrayList<Capital_City> showPopulatedCapitalCityRegion() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String query = "SELECT city.Name,country.Name,city.Population FROM city,country WHERE country.Capital = city.ID and country.Region = 'SouthEastAsia' ORDER BY city.Population desc";
+
+            // Execute SQL statement
+            ResultSet rs = stmt.executeQuery(query);
+
+            ArrayList<Capital_City> CapitalCities_continent = new ArrayList<Capital_City>();
+            while (rs.next()) {
+                Capital_City CapCities = new Capital_City();
+                CapCities.setcity_Name(rs.getString("city.Name"));
+                CapCities.setcountry_Name(rs.getString("country.Name"));
+                CapCities.setPopulation(rs.getInt("city.Population"));
+                CapitalCities_continent.add(CapCities);
+            }
+            return CapitalCities_continent;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Populated capital Cities in details");
+        }
+        return null;
+    }
+
+
+    /**
+     * Gets top 5 populated capital cities in a world.......
+     *
+     **/
+    public ArrayList<Capital_City> showPopulatedCapitalCityWorld() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String query = "SELECT city.Name,country.Name,city.Population FROM city,country WHERE country.Capital = city.ID ORDER BY city.Population desc limit 5";
+
+            // Execute SQL statement
+            ResultSet rs = stmt.executeQuery(query);
+
+            ArrayList<Capital_City> CapitalCities_continent = new ArrayList<Capital_City>();
+            while (rs.next()) {
+                Capital_City CapCities = new Capital_City();
+                CapCities.setcity_Name(rs.getString("city.Name"));
+                CapCities.setcountry_Name(rs.getString("country.Name"));
+                CapCities.setPopulation(rs.getInt("city.Population"));
+                CapitalCities_continent.add(CapCities);
+            }
+            return CapitalCities_continent;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Populated capital Cities in details");
+        }
+        return null;
+    }
 
     /**
      * Gets top 5 populated capital cities in a continent.......
