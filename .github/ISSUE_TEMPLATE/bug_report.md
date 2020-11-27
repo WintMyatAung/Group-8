@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: ''
+title: 'How to run'
 labels: bug
 assignees: WintMyatAung, AungKhantPaing-bit, shinehtetoo, bhonethetaung01
 
@@ -12,10 +12,10 @@ A clear and concise description of what the bug is.
 
 **To Reproduce**
 Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+1. Go to 'maven'
+2. Click on 'compile and run'
+3. Click on 'package and run'
+4. Open 'docker-compose.yml and run it in the docker'
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.
