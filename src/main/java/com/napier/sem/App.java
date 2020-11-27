@@ -193,13 +193,6 @@ public class App
         System.out.println("The population of a city (Los Angeles) is "+ city +".\n\n");
 
 
-        //  Get Languages
-        ArrayList<Languages> getlanguage = a.showlanguages();
-
-        // Show Languages by largest to smallest
-        System.out.println("Show Languages by largest to smallest \n");
-        a.printLanguage(getlanguage);
-
         // Disconnect from database
         a.disconnect();
     }
@@ -1277,39 +1270,6 @@ public class App
     }
 
     /**
-     * Gets Languages.
-     * Shine Htet Oo [40478643]
-     **/
-    public ArrayList<Languages> showlanguages()
-    {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect = "SELECT COUNT(CountryCode), Language FROM countrylanguage GROUP BY Language ORDER BY COUNT(CountryCode) DESC";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract City information
-            ArrayList<Languages> getlang = new ArrayList<Languages>();
-            while (rset.next())
-            {
-                Languages lang = new Languages();
-                lang.setCountLang(rset.getInt("COUNT(CountryCode)"));
-                lang.setLanguage(rset.getString("Language"));
-                getlang.add(lang);
-            }
-            return getlang;
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get Languages");
-            return null;
-        }
-    }
-
-    /**
      * Print a list of countries.
      * Aung Khant Paing [40478639]
     **/
@@ -1433,48 +1393,6 @@ public class App
                     String.format("%-40s %-20s %-40s",
                             city_Name, country_Name, Population);
             System.out.println(capCt_string);
-        }
-        for (int i = 1; i <= 25; i = i +1)
-        {
-            System.out.print("--");
-        }
-        System.out.println("\n\n");
-    }
-
-
-    /**
-     * Prints Languages
-     * Shine Htet Oo [40478643]
-     **/
-    public void printLanguage(ArrayList<Languages> languages) {
-        // Check the Language data exit or not.
-        if (languages == null)
-        {
-            System.out.println("Not getting the city data.");
-            return;
-        }
-        // Check the Language Data is empty or not.
-        if (languages.size() == 0)
-        {
-            System.out.println("City data is empty.");
-            return;
-        }
-        // Print header
-        System.out.println(String.format("%-40s %-30s", "Language", "No of Country"));
-        System.out.println(String.format("%-40s %-30s", "________", "_____________"));
-        // Loop over all languages list
-        for (Languages getlang : languages) {
-            // Check the contains exit or not.
-            if (getlang == null) {
-                System.out.println("Not Getting Languages.");
-                continue;
-            }
-            String Language = getlang.getLanguage();
-            Integer CountLanguage = getlang.getCountLang();
-            String ct_string =
-                    String.format("%-40s %-30s",
-                            Language, CountLanguage);
-            System.out.println(ct_string);
         }
         for (int i = 1; i <= 25; i = i +1)
         {
