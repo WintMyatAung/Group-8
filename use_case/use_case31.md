@@ -1,9 +1,9 @@
-USE CASE: 28 The population of a region.
+USE CASE: 31 The population of a city.
 =========
 
 Goal in Context
 ------
-The user want to see the population of the region.
+The user want to see the population of the city.
 
 Scope
 ----
@@ -19,7 +19,7 @@ Database contains current country information.
 
 Success End Condition
 ----
-The output is available for user to see the total population information of the region.
+The output is available for user to see the total population information of the city.
 
 Failed End Condition
 ----
@@ -35,7 +35,7 @@ A request for countries population information to developer.
 
 MAIN SUCCESS SCENARIO
 -----
-1. The user provides output of the total population information of the region.
+1. The user provides output of the total population information of the city.
 
 EXTENSIONS
 -----

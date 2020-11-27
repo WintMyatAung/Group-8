@@ -1,4 +1,4 @@
-USE CASE: 26 The population of a continent.
+USE CASE: 27 The population of a continent.
 =========
 
 Goal in Context
