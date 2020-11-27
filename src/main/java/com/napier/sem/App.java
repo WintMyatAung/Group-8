@@ -142,12 +142,18 @@ public class App
         // Get the population of people, people living in cities, and people not living in cities in each continent.
         ArrayList<Population> continentPop = a.livingCityInContinent();
 
+        // Get the population of people, people living in cities, and people not living in cities in each region.
+        ArrayList<Population> regionPop = a.livingCityInRegion();
+
         // Output the people living in cities, and people not living in cities
         System.out.println("Gets the population for people living in cities, and people not living in cities in each Country. \n");
         a.printPopulation(countryPopulation);
 
         System.out.println("Gets the population for people living in cities, and people not living in cities in each Continent. \n");
         a.printPopulation(continentPop);
+
+        System.out.println("Gets the population for people living in cities, and people not living in cities in each Region. \n");
+        a.printPopulation(regionPop);
 
 
         // Get the total world Population
@@ -998,6 +1004,67 @@ public class App
         {
             System.out.println(e.getMessage());
             System.out.println("Failed to get total Population and people who living in the city by Continent.");
+            return null;
+        }
+    }
+
+
+    /**
+     * Gets the population for each Region.
+     * Wint Myat Aung [40478650]
+    **/
+    public ArrayList<Population> livingCityInRegion()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            String getRegion = "SELECT count(Name), Region FROM country GROUP BY Region";
+            ResultSet getReg = stmt.executeQuery(getRegion);
+            ArrayList<Population> population = new ArrayList<Population>();
+            ArrayList<String> getCountryArray = new ArrayList<String>();
+            ArrayList<String> getRegionArray = new ArrayList<String>();
+            while (getReg.next())
+            {
+                getRegionArray.add(getReg.getString("Region"));
+            }
+            for (String reg : getRegionArray)
+            {
+                Population pop = new Population();
+                BigInteger total = new BigInteger("0");
+                BigInteger cityPop = new BigInteger("0");
+                pop.setName(reg);
+                String getCountry = "SELECT Name FROM country WHERE Region = \'" + reg +"\'";
+                ResultSet getName = stmt.executeQuery(getCountry);
+                while (getName.next())
+                {
+                    getCountryArray.add(getName.getString("Name"));
+                }
+                for (String Name : getCountryArray)
+                {
+                    String strSelect = "SELECT Population, Code, Name FROM country WHERE Name = \'" + Name +"\'";
+                    ResultSet rset = stmt.executeQuery(strSelect);
+                    while (rset.next())
+                    {
+                        int total1 = rset.getInt("Population");
+                        BigInteger total2 = BigInteger.valueOf(total1);
+                        total = total.add(total2);
+                        String code = rset.getString("Code");
+                        String getCityPOP = "SELECT sum(Population) as cityPop FROM city WHERE CountryCode = \'" + code +"\' Group By CountryCode";
+                        BigInteger cityPop1 = GetcityPopulation(getCityPOP);
+                        cityPop = cityPop.add(cityPop1);
+                    }
+                }
+                pop.setTotal(total);
+                pop.setCity(cityPop);
+                population.add(pop);
+            }
+            return population;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get total Population and people who living in the city by Region.");
             return null;
         }
     }
