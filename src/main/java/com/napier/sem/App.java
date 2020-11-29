@@ -123,41 +123,49 @@ public class App
 
 
         // Gets top 5 populated capital cities in a continent
-        ArrayList<Capital_City> CapitalCities_continent = a.showPopulatedCapitalCityWithContinent();
+        ArrayList<Capital_City> CapitalCities_continent = a.getTop5PopulatedCapitalCityWithContinent();
 
         // Gets populated capital cities in a World
-        ArrayList<Capital_City> capitalCitiesWorld = a.showPopulatedCapitalCity();
+        ArrayList<Capital_City> capitalCitiesWorld = a.getPopulatedCapitalCity();
 
         // Gets populated capital cities in a Continent
-        ArrayList<Capital_City> capitalCitiesContinent = a.showPopulatedCapitalCityContinent();
+        ArrayList<Capital_City> capitalCitiesContinent = a.getPopulatedCapitalCityContinent();
 
         // Gets populated capital cities in a Region
-        ArrayList<Capital_City> capitalCitiesRegion = a.showPopulatedCapitalCityRegion();
+        ArrayList<Capital_City> capitalCitiesRegion = a.getPopulatedCapitalCityRegion();
 
         // Gets top 5 populated capital cities in a World
-        ArrayList<Capital_City> capitalCities_World = a.showPopulatedCapitalCityWorld();
+        ArrayList<Capital_City> capitalCities_World = a.getTop5PopulatedCapitalCityWorld();
 
         // Gets top 5 populated capital cities in a region
-        ArrayList<Capital_City> CapitalCities_region = a.showPopulatedCapitalCityWithRegion();
+        ArrayList<Capital_City> CapitalCities_region = a.getTop5PopulatedCapitalCityWithRegion();
 
         // Output the Capital city array list
-        System.out.println("Gets top 5 populated capital cities in a continent....... \n");
-        a.outputCapitalCity(CapitalCities_continent);
-
-        System.out.println("Gets top 5 populated capital cities in a region....... \n");
-        a.outputCapitalCity(CapitalCities_region);
-
-        System.out.println("Gets populated capital cities in a world....... \n");
+        System.out.println("Populated capital cities in a world....... \n");
         a.outputCapitalCity(capitalCitiesWorld);
 
-        System.out.println("Gets populated capital cities in a continent....... \n");
+        System.out.println("Populated capital cities in a continent....... \n");
         a.outputCapitalCity(capitalCitiesContinent);
 
-        System.out.println("Gets populated capital cities in a region....... \n");
+        System.out.println("Populated capital cities in a region....... \n");
         a.outputCapitalCity(capitalCitiesRegion);
 
-        System.out.println("Gets top 5 populated capital cities in a World....... \n");
+        System.out.println("Top 5 populated capital cities in a World....... \n");
         a.outputCapitalCity(capitalCities_World);
+
+        System.out.println("Top 5 populated capital cities in a continent....... \n");
+        a.outputCapitalCity(CapitalCities_continent);
+
+        System.out.println("Top 5 populated capital cities in a region....... \n");
+        a.outputCapitalCity(CapitalCities_region);
+
+
+        // Get the population of people, people living in cities, and people not living in cities in each country.
+        ArrayList<Population> countryPopulation = a.livingCityInCountry();
+
+        // Output the population of people, people living in cities, and people not living in cities
+        System.out.println("***The population of people, people living in cities, and people not living in cities in each country.***\n\n");
+        a.printPopulation(countryPopulation);
 
 
         // Get the total world Population
@@ -178,7 +186,6 @@ public class App
         // Get the total Los Angeles city population
         BigInteger city = a.getCityPopulation();
 
-
         // Output the Population information
         System.out.println("The population of the world is "+ world +".\n\n");
 
@@ -191,7 +198,6 @@ public class App
         System.out.println("The population of a district (Rio Grande do Sul) is "+ district +".\n\n");
 
         System.out.println("The population of a city (Los Angeles) is "+ city +".\n\n");
-
 
         // Disconnect from database
         a.disconnect();
@@ -880,9 +886,9 @@ public class App
 
     /**
      * Gets populated capital cities in a world
-     *
+     * Bhone Thet Aung [40478627]
      **/
-    public ArrayList<Capital_City> showPopulatedCapitalCity() {
+    public ArrayList<Capital_City> getPopulatedCapitalCity() {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -913,9 +919,9 @@ public class App
 
     /**
      * Gets populated capital cities in a continent
-     *
+     * Bhone Thet Aung [40478627]
      **/
-    public ArrayList<Capital_City> showPopulatedCapitalCityContinent() {
+    public ArrayList<Capital_City> getPopulatedCapitalCityContinent() {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -946,15 +952,15 @@ public class App
 
     /**
      * Gets populated capital cities in a Region.......
-     *
+     * Bhone Thet Aung [40478627]
      **/
-    public ArrayList<Capital_City> showPopulatedCapitalCityRegion() {
+    public ArrayList<Capital_City> getPopulatedCapitalCityRegion() {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
 
             // Create string for SQL statement
-            String query = "SELECT city.Name,country.Name,city.Population FROM city,country WHERE country.Capital = city.ID and country.Region = 'SouthEastAsia' ORDER BY city.Population desc";
+            String query = "SELECT city.Name,country.Name,city.Population FROM city,country WHERE country.Capital = city.ID and country.Region = 'Southeast Asia' ORDER BY city.Population desc";
 
             // Execute SQL statement
             ResultSet rs = stmt.executeQuery(query);
@@ -979,9 +985,9 @@ public class App
 
     /**
      * Gets top 5 populated capital cities in a world.......
-     *
+     * Bhone Thet Aung [40478627]
      **/
-    public ArrayList<Capital_City> showPopulatedCapitalCityWorld() {
+    public ArrayList<Capital_City> getTop5PopulatedCapitalCityWorld() {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1013,7 +1019,7 @@ public class App
      * Gets top 5 populated capital cities in a continent.......
      * Wint Myat Aung [40478650]
      **/
-    public ArrayList<Capital_City> showPopulatedCapitalCityWithContinent() {
+    public ArrayList<Capital_City> getTop5PopulatedCapitalCityWithContinent() {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1046,7 +1052,7 @@ public class App
      * Gets top 5 populated capital cities in a region.......
      * Wint Myat Aung [40478650]
     **/
-    public ArrayList<Capital_City> showPopulatedCapitalCityWithRegion() {
+    public ArrayList<Capital_City> getTop5PopulatedCapitalCityWithRegion() {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1072,6 +1078,78 @@ public class App
             System.out.println("Failed to get Populated capital Cities in details");
         }
         return null;
+    }
+
+    /**
+     * Gets the population for each country.
+     * Aung Khant Paing [40478639]
+     **/
+    public ArrayList<Population> livingCityInCountry()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            String getCountryName = "SELECT Name FROM country";
+            ResultSet getName = stmt.executeQuery(getCountryName);
+            ArrayList<Population> population = new ArrayList<Population>();
+            ArrayList<String> getCountryArray = new ArrayList<String>();
+            while (getName.next())
+            {
+                getCountryArray.add(getName.getString("Name"));
+            }
+            for (String Name : getCountryArray)
+            {
+                String strSelect = "SELECT Population, Code, Name FROM country WHERE Name = \'" + Name +"\'";
+                ResultSet rset = stmt.executeQuery(strSelect);
+                while (rset.next())
+                {
+                    Population pop = new Population();
+                    pop.setName(rset.getString("Name"));
+                    int total1 = rset.getInt("Population");
+                    BigInteger total = BigInteger.valueOf(total1);
+                    pop.setTotal(total);
+                    String code = rset.getString("Code");
+                    String getCityPOP = "SELECT sum(Population) as cityPop FROM city WHERE CountryCode = \'" + code +"\' Group By CountryCode";
+                    BigInteger cityPop = GetcityPopulation(getCityPOP);
+                    pop.setCity(cityPop);
+                    population.add(pop);
+                }
+            }
+            return population;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get total Population and people who living in the city by country name.");
+            return null;
+        }
+    }
+
+    /**
+     * Gets the population of people who live in city for each country.
+     * Aung Khant Paing [40478639]
+     **/
+    public BigInteger GetcityPopulation(String query)
+    {
+        try {
+            BigInteger city = new BigInteger("0");
+            Statement stmt = con.createStatement();
+            ResultSet resultPOP = stmt.executeQuery(query);
+            while (resultPOP.next())
+            {
+                int pop1 = resultPOP.getInt("cityPop");
+                BigInteger pop = BigInteger.valueOf(pop1);
+                city = city.add(pop);
+            }
+            return city;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to total Population of people who living in city or not.");
+            return null;
+        }
     }
 
 
@@ -1173,6 +1251,7 @@ public class App
         }
     }
 
+
     /**
      * Gets all Egypt Country population.
      * Shine Htet Oo [40478643]
@@ -1204,6 +1283,7 @@ public class App
             return null;
         }
     }
+
 
     /**
      * Gets all Rio Grande do Sul district population.
@@ -1237,6 +1317,7 @@ public class App
         }
     }
 
+
     /**
      * Gets all Los Angeles city population.
      * Shine Htet Oo [40478643]
@@ -1268,6 +1349,7 @@ public class App
             return null;
         }
     }
+
 
     /**
      * Print a list of countries.
@@ -1377,8 +1459,8 @@ public class App
             return;
         }
         // Print header
-        System.out.println(String.format("%-40s %-20s %-40s", "Name", "Country", "Population"));
-        System.out.println(String.format("%-40s %-20s %-40s", "_______", "__________", "____________"));
+        System.out.println(String.format("%-40s %-40s %-20s", "Capital City", "Country", "Population"));
+        System.out.println(String.format("%-40s %-40s %-20s", "____________", "_______", "__________"));
         // Loop over all Capital City in the list
         for (Capital_City capCt : CapCities) {
             // Check the contains exit or not.
@@ -1390,7 +1472,7 @@ public class App
             String country_Name = capCt.getcountry_Name();
             int Population = capCt.getPopulation();
             String capCt_string =
-                    String.format("%-40s %-20s %-40s",
+                    String.format("%-40s %-40s %-20s",
                             city_Name, country_Name, Population);
             System.out.println(capCt_string);
         }
@@ -1399,6 +1481,72 @@ public class App
             System.out.print("--");
         }
         System.out.println("\n\n");
+    }
+
+    /**
+     * Prints the population output
+     * Aung Khant Paing [40478643]
+     **/
+    public void printPopulation(ArrayList<Population> popopulation) {
+        try {
+            // Check the Country data exit or not.
+            if (popopulation == null)
+            {
+                System.out.println("Not getting the Population data");
+                return;
+            }
+            // Check the value is not null
+            if (popopulation.size() == 0)
+            {
+                System.out.println("Empty Population ArrayList.");
+            }
+            else
+            {
+                for (Population pop : popopulation) {
+                    // Check the contains exit or not.
+                    if (pop == null) {
+                        System.out.println("Not Getting the Full information of Population.");
+                        continue;
+                    }
+                    String name = pop.getName();
+                    BigInteger total = pop.getTotal();
+                    BigInteger city = pop.getCity();
+                    BigInteger nocity = total.subtract(city);
+
+                    System.out.println("***" + name +"***");
+                    System.out.println("The total population is " + total +".");
+
+                    // Check the total population is equal to zero or not.
+                    if ( total.compareTo(BigInteger.ZERO) == 0){
+                        System.out.println("The total population of the people who live in cities is " + city +"%.");
+                        System.out.println("The total population of the people who not live in cities is " + nocity +"%.\n");
+                    }
+
+                    else
+                    {
+                        // calculate the percentage of people who live in city population.
+                        BigDecimal perc = new BigDecimal("100");
+                        BigDecimal citypercentage = new BigDecimal (city).multiply(perc).divide( new BigDecimal (total), 2);
+
+                        // Calculate the percentage of people who do not live in city population.
+                        BigDecimal nocitypercentage = perc.subtract(citypercentage);
+
+                        System.out.println("The total population of the people who live in cities is " + citypercentage +"%.");
+                        System.out.println("The total population of the people who not live in cities is " + nocitypercentage +"%.\n");
+                    }
+                }
+                for (int i = 1; i <= 34; i = i +1)
+                {
+                    System.out.print("--");
+                }
+                System.out.println("\n\n");
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to output the living city population");
+        }
     }
 }
 

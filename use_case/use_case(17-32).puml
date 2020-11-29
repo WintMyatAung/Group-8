@@ -21,6 +21,9 @@ rectangle "Function" {
     usecase UC6a as "display the top 5
     Capital city population by region."
 
+    usecase UC9a as "display the population of people, people living in cities,
+    and people not living in cities in each country."
+
     usecase UC10a as "display the population of the world."
 
     usecase UC11a as "display the population of a continent."
@@ -40,6 +43,7 @@ rectangle "Function" {
     User --> UC4a
     User --> UC5a
     User --> UC6a
+    User --> UC9a
     User --> UC10a
     User --> UC11a
     User --> UC12a
