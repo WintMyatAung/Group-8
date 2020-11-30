@@ -167,7 +167,6 @@ public class App
         System.out.println("***The population of people, people living in cities, and people not living in cities in each country.***\n\n");
         a.printPopulation(countryPopulation);
 
-
         // Get the total world Population
         BigInteger world = a.getWorldPopulation();
 
@@ -198,6 +197,12 @@ public class App
         System.out.println("The population of a district (Rio Grande do Sul) is "+ district +".\n\n");
 
         System.out.println("The population of a city (Los Angeles) is "+ city +".\n\n");
+
+        // Get percentagelanguage.
+        ArrayList<Language> getlanguage = a.getLanguagePercentage();
+
+        System.out.println("Most used Languages and world population percentage\n\n");
+        a.outputLanguage(getlanguage);
 
         // Disconnect from database
         a.disconnect();
@@ -1352,6 +1357,59 @@ public class App
 
 
     /**
+     * Get the greatest number to smallest language percentage of the world population
+     * Shine Htet Oo [40478643]
+     */
+    public ArrayList<Language> getLanguagePercentage()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            String[] languagename = {"Chinese", "English", "Hindi", "Spanish", "Arabic"};
+            BigInteger totalPopulation = getWorldPopulation();
+            ArrayList<Language> language = new ArrayList<Language>();
+            for (String lang : languagename)
+            {
+                Language language1 = new Language();
+                String getcountryname = "SELECT CountryCode FROM countrylanguage WHERE Language = '" + lang +"'";
+                ResultSet getname = stmt.executeQuery(getcountryname);
+                ArrayList<String> name = new ArrayList<String>();
+                BigInteger Population = new BigInteger("0");
+                while (getname.next())
+                {
+                    String country = getname.getString("CountryCode");
+                    name.add(country);
+                }
+                for (String code : name)
+                {
+                    String getPopulation = "SELECT Population FROM country WHERE Code = '" + code +"'";
+                    ResultSet getPop = stmt.executeQuery(getPopulation);
+                    while (getPop.next())
+                    {
+                        int pop = getPop.getInt("Population");
+                        BigInteger pop1 = BigInteger.valueOf(pop);
+                        Population = Population.add(pop1);
+                    }
+                }
+                BigDecimal perc = new BigDecimal("100");
+                BigDecimal populationPercentage = new BigDecimal (Population).multiply(perc).divide( new BigDecimal (totalPopulation), 2);
+                language1.setlanguageName(lang);
+                language1.setpopulation(populationPercentage);
+                language.add(language1);
+            }
+            return language;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get greatest number to smallest language percentage of the world population.");
+            return null;
+        }
+    }
+
+
+    /**
      * Print a list of countries.
      * Aung Khant Paing [40478639]
     **/
@@ -1547,6 +1605,43 @@ public class App
             System.out.println(e.getMessage());
             System.out.println("Failed to output the living city population");
         }
+    }
+
+
+    /**
+     * Print the greatest number to smallest language percentage of the world population
+     */
+    public void outputLanguage(ArrayList<Language> language)
+    {
+        // Check the Capital City data exit or not.
+        if (language == null)
+        {
+            System.out.println("Not getting the language data.");
+            return;
+        }
+        // Check the Capital City Data is empty or not.
+        if (language.size() == 0)
+        {
+            System.out.println("Language data is empty.");
+            return;
+        }
+        Collections.sort(language, Language.compareLanguage);
+        // Loop over all Language in the list
+        for (Language lang : language) {
+            // Check the contains exit or not.
+            if (lang == null) {
+                System.out.println("Not Getting the Full information of language data.");
+                continue;
+            }
+            String name = lang.getlanguageName();
+            BigDecimal population = lang.getpopulation();
+            System.out.println(name+" language is used " + population +"% of the world population.\n");
+        }
+        for (int i = 1; i <= 25; i = i +1)
+        {
+            System.out.print("--");
+        }
+        System.out.println("\n\n");
     }
 }
 
