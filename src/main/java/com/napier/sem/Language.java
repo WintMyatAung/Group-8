@@ -30,4 +30,20 @@ public class Language {
             return result;
         }
     };
+
+    private String countryName;
+    public String getcountryName(){
+        return countryName;
+    }
+    public void setcountryName(String attribute){
+        this.countryName = attribute;
+    }
+
+    private BigDecimal percentage;
+    public BigDecimal getPercentage(){
+        return percentage;
+    }
+    public void setPercentage(BigDecimal attribute){
+        this.percentage = attribute;
+    }
 }

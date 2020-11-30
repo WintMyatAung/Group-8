@@ -1366,35 +1366,49 @@ public class App
         {
             // Create an SQL statement
             Statement stmt = con.createStatement();
-            String[] languagename = {"Chinese", "English", "Hindi", "Spanish", "Arabic"};
+
             BigInteger totalPopulation = getWorldPopulation();
             ArrayList<Language> language = new ArrayList<Language>();
-            for (String lang : languagename)
+            String[] languagename = {"Chinese", "English", "Hindi", "Spanish", "Arabic"};
+
+            for (String langname : languagename)
             {
+                BigDecimal population = new BigDecimal("0");
+                BigDecimal perc = new BigDecimal("100");
                 Language language1 = new Language();
-                String getcountryname = "SELECT CountryCode FROM countrylanguage WHERE Language = '" + lang +"'";
-                ResultSet getname = stmt.executeQuery(getcountryname);
-                ArrayList<String> name = new ArrayList<String>();
-                BigInteger Population = new BigInteger("0");
-                while (getname.next())
+                ArrayList<Language> percentageArray = new ArrayList<Language>();
+
+                String getPercentage = "SELECT Percentage, CountryCode FROM countrylanguage WHERE Language = '" + langname +"'";
+
+                // Get the Percentage
+                ResultSet getPer = stmt.executeQuery(getPercentage);
+                while (getPer.next())
                 {
-                    String country = getname.getString("CountryCode");
-                    name.add(country);
+                    Language languagePercentage = new Language();
+                    languagePercentage.setcountryName(getPer.getString("CountryCode"));
+                    languagePercentage.setPercentage(getPer.getBigDecimal("Percentage"));
+                    percentageArray.add(languagePercentage);
                 }
-                for (String code : name)
+
+                // get the total population for each language
+                for (Language perArray : percentageArray)
                 {
-                    String getPopulation = "SELECT Population FROM country WHERE Code = '" + code +"'";
+                    BigDecimal percentage = perArray.getPercentage();
+                    String getPopulation = "SELECT Population FROM country WHERE Code = '" + perArray.getcountryName() +"'";
+
                     ResultSet getPop = stmt.executeQuery(getPopulation);
                     while (getPop.next())
                     {
-                        int pop = getPop.getInt("Population");
-                        BigInteger pop1 = BigInteger.valueOf(pop);
-                        Population = Population.add(pop1);
+                        BigDecimal pop = getPop.getBigDecimal("Population");
+                        BigDecimal pop2 = percentage.multiply(pop).divide( perc, 2);
+                        population = population.add(pop2);
                     }
                 }
-                BigDecimal perc = new BigDecimal("100");
-                BigDecimal populationPercentage = new BigDecimal (Population).multiply(perc).divide( new BigDecimal (totalPopulation), 2);
-                language1.setlanguageName(lang);
+
+                //Calculate the percentage of the population.
+                BigDecimal populationPercentage = population.multiply(perc).divide( new BigDecimal (totalPopulation), 2);
+
+                language1.setlanguageName(langname);
                 language1.setpopulation(populationPercentage);
                 language.add(language1);
             }
