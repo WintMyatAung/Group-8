@@ -2,7 +2,6 @@ package com.napier.sem;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import java.math.BigInteger;
 import java.util.ArrayList;
 
@@ -130,4 +129,68 @@ public class AppTest {
         cap.add(captest);
         app.outputCapitalCity(cap);
     }
+
+    // Aung Khant Paing
+    // Testing about the arraylist null.
+    @Test
+    void printPopulationTestNull()
+    {
+        app.printPopulation(null);
+    }
+
+    //    Testing about the arraylist contains to be null.
+    @Test
+    void printPopulationTestContainsNull()
+    {
+        ArrayList<Population> pop = new ArrayList<Population>();
+        pop.add(null);
+        app.printPopulation(pop);
+    }
+
+    //    Testing about the arraylist to be empty.
+    @Test
+    void printPopulationTestEmpty()
+    {
+        ArrayList<Population> pop = new ArrayList<Population>();
+        app.printPopulation(pop);
+    }
+
+    //    Testing about the arraylist.
+    @Test
+    void printPopulationTest()
+    {
+        ArrayList<Population> pop = new ArrayList<Population>();
+        Population poptest = new Population();
+        poptest.setName("Antarctica");
+        poptest.setTotal(new BigInteger("0"));
+        poptest.setCity(new BigInteger("0"));
+        pop.add(poptest);
+        app.printPopulation(pop);
+    }
+
+    // Aung Khant Paing
+    // Testing about the arraylist null.
+    @Test
+    void printLanguageTestNull()
+    {
+        app.outputLanguage(null);
+    }
+
+    //    Testing about the arraylist contains to be null.
+    @Test
+    void printLanguageTestContainsNull()
+    {
+        ArrayList<Language> lang = new ArrayList<Language>();
+        lang.add(null);
+        app.outputLanguage(lang);
+    }
+
+    //    Testing about the arraylist to be empty.
+    @Test
+    void printLanguageTestEmpty()
+    {
+        ArrayList<Language> lang = new ArrayList<Language>();
+        app.outputLanguage(lang);
+    }
+
 }

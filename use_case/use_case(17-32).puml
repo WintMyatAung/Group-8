@@ -21,6 +21,12 @@ rectangle "Function" {
     usecase UC6a as "display the top 5
     Capital city population by region."
 
+    usecase UC7a as "display the population of people, people living in cities,
+    and people not living in cities in each continent."
+
+    usecase UC8a as "display the population of people, people living in cities,
+    and people not living in cities in each region."
+
     usecase UC9a as "display the population of people, people living in cities,
     and people not living in cities in each country."
 
@@ -36,6 +42,8 @@ rectangle "Function" {
 
     usecase UC15a as "display the population of a city."
 
+    usecase UC16a as "display the number of people who speak the languages."
+
 
     User --> UC1a
     User --> UC2a
@@ -43,6 +51,8 @@ rectangle "Function" {
     User --> UC4a
     User --> UC5a
     User --> UC6a
+    User --> UC7a
+    User --> UC8a
     User --> UC9a
     User --> UC10a
     User --> UC11a
@@ -50,5 +60,6 @@ rectangle "Function" {
     User --> UC13a
     User --> UC14a
     User --> UC15a
+    User --> UC16a
 }
 @enduml

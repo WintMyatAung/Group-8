@@ -41,22 +41,22 @@ public class App
 
 
         // output the country array list
-        System.out.println("Table countries sorted by Largest Population to Smallest Population \n");
+        System.out.println("^^^ All the countries in the world organised by largest population to smallest ^^^\n");
         a.PrintCountryList(countryWorld);
 
-        System.out.println("Table countries sorted by Largest Population to Smallest Population of a Continent \n");
+        System.out.println("^^^ All the countries in a continent organised by largest population to smallest ^^^\n");
         a.PrintCountryList(countryContinent);
 
-        System.out.println("Table countries sorted by Largest Population to Smallest Population of a Region \n");
+        System.out.println("^^^ All the countries in a region organised by largest population to smallest ^^^\n");
         a.PrintCountryList(countryRegion);
 
-        System.out.println("Top 5 populated countries in the world.......");
+        System.out.println("^^^ Top 5 populated countries in the world ^^^\n");
         a.PrintCountryList(pcountry_world);
 
-        System.out.println("Top 5 populated countries in a Continent.......");
+        System.out.println("^^^ Top 5 populated countries in a Continent ^^^\n");
         a.PrintCountryList(pcountry_continent);
 
-        System.out.println("Top 5 populated countries in a Region.......");
+        System.out.println("^^^ Top 5 populated countries in a Region ^^^\n");
         a.PrintCountryList(pcountry_region);
 
 
@@ -91,34 +91,34 @@ public class App
         ArrayList<City> cityDistrictTop = a.showCityWithDistrictTop();
 
         // Output the city array list
-        System.out.println("Table cities sorted by Largest Population to Smallest Population \n");
+        System.out.println("### All the cities in the world organised by largest population to smallest ###\n");
         a.outputCity(cityWorld);
 
-        System.out.println("Table cities sorted by Largest Population to Smallest Population of a Continent \n");
+        System.out.println("### All the cities in a continent organised by largest population to smallest ###\n");
         a.outputCity(cityContinent);
 
-        System.out.println("populated city listed by country region \n");
+        System.out.println("### All the cities in a region organised by largest population to smallest ###\n");
         a.outputCity(cityCountryRegion);
 
-        System.out.println("populated city listed by country name \n");
+        System.out.println("### All the cities in a country organised by largest population to smallest ###\n");
         a.outputCity(cityCountryName);
 
-        System.out.println("Get the largest to smallest population by city District \n");
+        System.out.println("### All the cities in a district organised by largest population to smallest ###\n");
         a.outputCity(cities_district);
 
-        System.out.println("Get top 5 populated city in the world \n");
+        System.out.println("### Top 5 populated city in the world ###\n");
         a.outputCity(pcity_world);
 
-        System.out.println("Top 5 populated city listed by country continent \n");
+        System.out.println("### Top 5 populated city listed by country continent ###\n");
         a.outputCity(cityContinentTop);
 
-        System.out.println("Top 5 populated city listed by country region \n");
+        System.out.println("### Top 5 populated city listed by country region ###\n");
         a.outputCity(cityRegionTop);
 
-        System.out.println("Top 5 populated city listed by country name \n");
+        System.out.println("### Top 5 populated city listed by country name ###\n");
         a.outputCity(cityNameTop);
 
-        System.out.println("Top 5 populated city listed by city District \n");
+        System.out.println("### Top 5 populated city listed by city District ###\n");
         a.outputCity(cityDistrictTop);
 
 
@@ -141,13 +141,13 @@ public class App
         ArrayList<Capital_City> CapitalCities_region = a.getTop5PopulatedCapitalCityWithRegion();
 
         // Output the Capital city array list
-        System.out.println("Populated capital cities in a world....... \n");
+        System.out.println("All the capital cities in the world organised by largest population to smallest....... \n");
         a.outputCapitalCity(capitalCitiesWorld);
 
-        System.out.println("Populated capital cities in a continent....... \n");
+        System.out.println("All the capital cities in a continent organised by largest population to smallest....... \n");
         a.outputCapitalCity(capitalCitiesContinent);
 
-        System.out.println("Populated capital cities in a region....... \n");
+        System.out.println("All the capital cities in a region organised by largest to smallest....... \n");
         a.outputCapitalCity(capitalCitiesRegion);
 
         System.out.println("Top 5 populated capital cities in a World....... \n");
@@ -170,13 +170,13 @@ public class App
         ArrayList<Population> countryPopulation = a.livingCityInCountry();
 
         // Output the population of people, people living in cities, and people not living in cities
-        System.out.println("***The population of people, people living in cities, and people not living in cities in each continent.***\n\n");
+        System.out.println("*** The population of people, people living in cities, and people not living in cities in each continent ***\n\n");
         a.printPopulation(continentPopulation);
 
-        System.out.println("***The population of people, people living in cities, and people not living in cities in each region.***\n\n");
+        System.out.println("*** The population of people, people living in cities, and people not living in cities in each region ***\n\n");
         a.printPopulation(regionPopulation);
 
-        System.out.println("***The population of people, people living in cities, and people not living in cities in each country.***\n\n");
+        System.out.println("*** The population of people, people living in cities, and people not living in cities in each country ***\n\n");
         a.printPopulation(countryPopulation);
 
 
@@ -199,22 +199,29 @@ public class App
         BigInteger city = a.getCityPopulation();
 
         // Output the Population information
-        System.out.println("The population of the world is "+ world +".\n\n");
+        System.out.println("Population Report !!! \n");
 
-        System.out.println("The population of a continent (Asia) is "+ continent +".\n\n");
+        System.out.println("The population of the world is "+ world +".");
 
-        System.out.println("The population of a region (Southeast Asia) is "+ region +".\n\n");
+        System.out.println("The population of a continent (Asia) is "+ continent +".");
 
-        System.out.println("The population of a country (Egypt) is "+ country +".\n\n");
+        System.out.println("The population of a region (Southeast Asia) is "+ region +".");
 
-        System.out.println("The population of a district (Rio Grande do Sul) is "+ district +".\n\n");
+        System.out.println("The population of a country (Egypt) is "+ country +".");
 
-        System.out.println("The population of a city (Los Angeles) is "+ city +".\n\n");
+        System.out.println("The population of a district (Rio Grande do Sul) is "+ district +".");
+
+        System.out.println("The population of a city (Los Angeles) is "+ city +".");
+        for (int i = 1; i <= 50; i = i +1)
+        {
+            System.out.print("xx");
+        }
+        System.out.println("\n");
 
         // Get percentagelanguage.
         ArrayList<Language> getlanguage = a.getLanguagePercentage();
 
-        System.out.println("Most used Languages and world population percentage\n\n");
+        System.out.println("Most used Languages and world population percentage \n");
         a.outputLanguage(getlanguage);
 
         // Disconnect from database
@@ -1270,7 +1277,7 @@ public class App
      * Gets the population of people who live in city for each country.
      * Aung Khant Paing [40478639]
      **/
-    public BigInteger GetcityPopulation(String query)
+    public BigInteger GetcityPopulation (String query)
     {
         try {
             BigInteger city = new BigInteger("0");
@@ -1502,7 +1509,6 @@ public class App
             // Create an SQL statement
             Statement stmt = con.createStatement();
 
-            BigInteger totalPopulation = getWorldPopulation();
             ArrayList<Language> language = new ArrayList<Language>();
             String[] languagename = {"Chinese", "English", "Hindi", "Spanish", "Arabic"};
 
@@ -1535,16 +1541,13 @@ public class App
                     while (getPop.next())
                     {
                         BigDecimal pop = getPop.getBigDecimal("Population");
-                        BigDecimal pop2 = percentage.multiply(pop).divide( perc, 2);
+                        BigDecimal pop2 = percentage.multiply(pop).divide( perc, 0);
                         population = population.add(pop2);
                     }
                 }
 
-                //Calculate the percentage of the population.
-                BigDecimal populationPercentage = population.multiply(perc).divide( new BigDecimal (totalPopulation), 2);
-
                 language1.setlanguageName(langname);
-                language1.setpopulation(populationPercentage);
+                language1.setpopulation(population);
                 language.add(language1);
             }
             return language;
@@ -1596,11 +1599,11 @@ public class App
             String countrystring = String.format("%-5s %-50s %-15s %-30s %-25s %-20s", code, name, Con, Reg, Pop, cap);
             System.out.println(countrystring);
         }
-        for (int j = 1; j <= 25; j+=1)
+        for (int j = 1; j <= 50; j+=1)
         {
-            System.out.print("--");
+            System.out.print("xx");
         }
-        System.out.println("\n\n");
+        System.out.println("\n");
     }
 
 
@@ -1623,7 +1626,7 @@ public class App
         }
         // Print header
         System.out.println(String.format("%-40s %-20s %-40s %-30s", "Name", "CountryCode", "District", "Population"));
-        System.out.println(String.format("%-40s %-20s %-40s %-30s", "____", "___________", "________", "__________"));
+        System.out.println(String.format("%-40s %-20s %-40s %-30s", "----", "-----------", "--------", "----------"));
         // Loop over all City in the list
         for (City ct : city) {
             // Check the contains exit or not.
@@ -1635,16 +1638,14 @@ public class App
             String CountryCode = ct.getCountryCode();
             String District = ct.getDistrict();
             int Population = ct.getPopulation();
-            String ct_string =
-                    String.format("%-40s %-20s %-40s %-30s",
-                            Name, CountryCode, District, Population);
+            String ct_string = String.format("%-40s %-20s %-40s %-30s", Name, CountryCode, District, Population);
             System.out.println(ct_string);
         }
-        for (int i = 1; i <= 25; i = i +1)
+        for (int i = 1; i <= 50; i = i +1)
         {
-            System.out.print("--");
+            System.out.print("xx");
         }
-        System.out.println("\n\n");
+        System.out.println("\n");
     }
 
 
@@ -1667,7 +1668,7 @@ public class App
         }
         // Print header
         System.out.println(String.format("%-40s %-40s %-20s", "Capital City", "Country", "Population"));
-        System.out.println(String.format("%-40s %-40s %-20s", "____________", "_______", "__________"));
+        System.out.println(String.format("%-40s %-40s %-20s", "------------", "-------", "----------"));
         // Loop over all Capital City in the list
         for (Capital_City capCt : CapCities) {
             // Check the contains exit or not.
@@ -1678,16 +1679,14 @@ public class App
             String city_Name = capCt.getcity_Name();
             String country_Name = capCt.getcountry_Name();
             int Population = capCt.getPopulation();
-            String capCt_string =
-                    String.format("%-40s %-40s %-20s",
-                            city_Name, country_Name, Population);
+            String capCt_string = String.format("%-40s %-40s %-20s", city_Name, country_Name, Population);
             System.out.println(capCt_string);
         }
-        for (int i = 1; i <= 25; i = i +1)
+        for (int i = 1; i <= 50; i = i +1)
         {
-            System.out.print("--");
+            System.out.print("xx");
         }
-        System.out.println("\n\n");
+        System.out.println("\n");
     }
 
     /**
@@ -1709,6 +1708,8 @@ public class App
             }
             else
             {
+                System.out.println(String.format("%-50s %-30s %-40s %-40s", "Name", "Total Population", "People Who living in City", "People Who not living in City"));
+                System.out.println(String.format("%-50s %-30s %-40s %-40s", "----", "----------------", "-------------------------", "-----------------------------"));
                 for (Population pop : popopulation) {
                     // Check the contains exit or not.
                     if (pop == null) {
@@ -1720,13 +1721,9 @@ public class App
                     BigInteger city = pop.getCity();
                     BigInteger nocity = total.subtract(city);
 
-                    System.out.println("***" + name +"***");
-                    System.out.println("The total population is " + total +".");
-
                     // Check the total population is equal to zero or not.
                     if ( total.compareTo(BigInteger.ZERO) == 0){
-                        System.out.println("The total population of the people who live in cities is " + city +"%.");
-                        System.out.println("The total population of the people who not live in cities is " + nocity +"%.\n");
+                        System.out.println(String.format("%-50s %-30s %-40s %-40s", name, total, city+"("+city+"% )", nocity+"("+nocity+"% )"));
                     }
 
                     else
@@ -1737,16 +1734,14 @@ public class App
 
                         // Calculate the percentage of people who do not live in city population.
                         BigDecimal nocitypercentage = perc.subtract(citypercentage);
-
-                        System.out.println("The total population of the people who live in cities is " + citypercentage +"%.");
-                        System.out.println("The total population of the people who not live in cities is " + nocitypercentage +"%.\n");
+                        System.out.println(String.format("%-50s %-30s %-40s %-40s", name, total, city+"("+citypercentage+"% )", nocity+"("+nocitypercentage+"% )"));
                     }
                 }
-                for (int i = 1; i <= 34; i = i +1)
+                for (int i = 1; i <= 50; i = i +1)
                 {
-                    System.out.print("--");
+                    System.out.print("xx");
                 }
-                System.out.println("\n\n");
+                System.out.println("\n");
             }
         }
         catch (Exception e)
@@ -1784,13 +1779,16 @@ public class App
             }
             String name = lang.getlanguageName();
             BigDecimal population = lang.getpopulation();
-            System.out.println(name+" language is used " + population +"% of the world population.\n");
+            BigInteger totalPopulation = getWorldPopulation();
+            //Calculate the percentage of the population.
+            BigDecimal populationPercentage = population.multiply(new BigDecimal("100")).divide( new BigDecimal (totalPopulation), 2);
+            System.out.println(name+" language is used " + population + "(" + populationPercentage +"%) of the world population.");
         }
-        for (int i = 1; i <= 25; i = i +1)
+        for (int i = 1; i <= 50; i = i +1)
         {
-            System.out.print("--");
+            System.out.print("xx");
         }
-        System.out.println("\n\n");
+        System.out.println("\n");
     }
 }
 
