@@ -1723,7 +1723,7 @@ public class App
 
                     // Check the total population is equal to zero or not.
                     if ( total.compareTo(BigInteger.ZERO) == 0){
-                        System.out.println(String.format("%-50s %-30s %-40s %-40s", name, total, city+"("+city+"% )", nocity+"("+nocity+"% )"));
+                        System.out.println(String.format("%-50s %-30s %-40s %-40s", name, total, city+"("+city+" %)", nocity+"("+nocity+" %)"));
                     }
 
                     else
@@ -1734,7 +1734,7 @@ public class App
 
                         // Calculate the percentage of people who do not live in city population.
                         BigDecimal nocitypercentage = perc.subtract(citypercentage);
-                        System.out.println(String.format("%-50s %-30s %-40s %-40s", name, total, city+"("+citypercentage+"% )", nocity+"("+nocitypercentage+"% )"));
+                        System.out.println(String.format("%-50s %-30s %-40s %-40s", name, total, city+"("+citypercentage+" %)", nocity+"("+nocitypercentage+" %)"));
                     }
                 }
                 for (int i = 1; i <= 50; i = i +1)
